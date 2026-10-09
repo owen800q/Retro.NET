@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/Retro.Wpf.Demo/Retro.Wpf.Demo.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Retro.Wpf/Retro.Wpf.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Retro.Wpf.Tests/Retro.Wpf.Tests.csproj" />
+  </Folder>
+</Solution>

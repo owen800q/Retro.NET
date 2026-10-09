@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Menu / Tooltip / Popover" subtitle="Floating surfaces" viewport="700x230" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:14px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .menu {
+    background: var(--surface-2);
+    box-shadow: var(--bevel-out-strong), 1px 1px 0 rgba(0,0,0,.2);
+    padding: 1px;
+    width: 220px;
+  }
+  .menu .item { padding: 3px 16px 3px 22px; cursor: default; display:flex; align-items:center; gap:6px; position: relative; }
+  .menu .item .ico { position:absolute; left: 4px; width: 14px; height: 14px; }
+  .menu .item .key { margin-left: auto; color: var(--fg-muted); font-size: 10px; }
+  .menu .item:hover { background: var(--header-blue-2); color: #fff; }
+  .menu .item.is-disabled { color: var(--fg-disabled); }
+  .menu .item.is-disabled:hover { background: transparent; color: var(--fg-disabled); }
+  .menu hr { border:0; border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-light); margin: 2px 0; }
+  .tooltip {
+    background: #FFFFE1;
+    box-shadow: 0 0 0 1px #000;
+    padding: 3px 6px;
+    font-size: 11px;
+    max-width: 260px;
+    display: inline-block;
+  }
+  .popover {
+    background: var(--surface);
+    box-shadow: var(--bevel-out-strong), 2px 2px 0 rgba(0,0,0,.2);
+    padding: 8px;
+    width: 240px;
+  }
+  .popover .ttl { font-family: var(--font-bold); font-weight: 700; margin-bottom: 4px; }
+  .popover .footer { display:flex; gap: 4px; justify-content: flex-end; margin-top: 8px; }
+</style></head>
+<body>
+  <div class="grid">
+    <div>
+      <div class="menu">
+        <div class="item"><svg class="ico"><use href="../assets/icons.svg#new"/></svg>New<span class="key">Ctrl+N</span></div>
+        <div class="item"><svg class="ico"><use href="../assets/icons.svg#open"/></svg>Open…<span class="key">Ctrl+O</span></div>
+        <div class="item"><svg class="ico"><use href="../assets/icons.svg#save"/></svg>Save<span class="key">Ctrl+S</span></div>
+        <div class="item is-disabled"><svg class="ico"><use href="../assets/icons.svg#saveas"/></svg>Save As…</div>
+        <hr>
+        <div class="item"><svg class="ico"><use href="../assets/icons.svg#print"/></svg>Print…<span class="key">Ctrl+P</span></div>
+        <hr>
+        <div class="item"><svg class="ico"><use href="../assets/icons.svg#x"/></svg>Exit<span class="key">Alt+F4</span></div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction: column; gap: 12px;">
+      <div class="tooltip">Tooltip with confirm/<br>cancel sancel cancel/<br>button.</div>
+      <div class="popover">
+        <div class="ttl">Popover</div>
+        <div>Detailed popover content over an content popover content.</div>
+        <div class="footer">
+          <button class="sap-btn">OK</button>
+          <button class="sap-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

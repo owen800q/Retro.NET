@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!-- @dsCard group="UI Kit — Sap Gui" name="UI Kit — SAP GUI" subtitle="Shipment Maintenance — full transactional screen" viewport="1100x720" -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SAP — Shipment: Display 0000080014</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../components.css">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #5A6A7E; overflow: hidden; }
+  body { font-family: var(--font-system); font-size: var(--type-sm); color: var(--fg); }
+  #root { height: 100vh; }
+  /* Page-level adjustments */
+  .page-banner {
+    background: linear-gradient(180deg, #FFF6D9 0%, #FFE8A8 100%);
+    box-shadow: var(--bevel-out);
+    padding: 4px 8px;
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 6px;
+    font-size: var(--type-sm);
+  }
+  .panel { background: var(--surface-2); box-shadow: var(--bevel-out-strong); padding: 0; }
+  .panel-body { padding: 10px 12px; }
+  .crumb { padding: 4px 8px; background: var(--surface-3); box-shadow: var(--bevel-in); margin-bottom: 6px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="controls.jsx"></script>
+<script type="text/babel" src="Window.jsx"></script>
+<script type="text/babel" src="Toolbar.jsx"></script>
+<script type="text/babel" src="Form.jsx"></script>
+<script type="text/babel" src="DataTable.jsx"></script>
+<script type="text/babel" src="TabStrip.jsx"></script>
+<script type="text/babel" src="Dialog.jsx"></script>
+<script type="text/babel">
+const { useState, useMemo } = React;
+
+function HeaderTab({ form, setForm }) {
+  const { Form, FormRow, Input, Select, Fieldset, Checkbox, Switch, Tag } = window.SAP;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+      <Fieldset legend="General data">
+        <Form columns="100px 1fr">
+          <FormRow label="Shipment" required>
+            <Input value={form.id} width={140} disabled />
+            <span style={{ marginLeft: 6, color: "var(--fg-muted)", fontSize: 10 }}>VL01N · 0000080014</span>
+          </FormRow>
+          <FormRow label="Carrier" required>
+            <Select
+              value={form.carrier}
+              onChange={(e) => setForm({ ...form, carrier: e.target.value })}
+              options={["DHL Freight", "UPS Ground", "FedEx Express", "Schenker", "Kuehne+Nagel"]}
+              width={200}
+            />
+          </FormRow>
+          <FormRow label="Service">
+            <Select
+              value={form.service}
+              onChange={(e) => setForm({ ...form, service: e.target.value })}
+              options={["Standard", "Express", "Economy"]}
+              width={200}
+            />
+          </FormRow>
+          <FormRow label="Route">
+            <Input value={form.route} onChange={(e) => setForm({ ...form, route: e.target.value })} width={200} />
+          </FormRow>
+        </Form>
+      </Fieldset>
+
+      <Fieldset legend="Dates &amp; Status">
+        <Form columns="100px 1fr">
+          <FormRow label="Pickup">
+            <Input value={form.pickup} onChange={(e) => setForm({ ...form, pickup: e.target.value })} width={120} />
+          </FormRow>
+          <FormRow label="Delivery">
+            <Input value={form.delivery} onChange={(e) => setForm({ ...form, delivery: e.target.value })} width={120} />
+          </FormRow>
+          <FormRow label="Priority">
+            <Select
+              value={form.priority}
+              onChange={(e) => setForm({ ...form, priority: e.target.value })}
+              options={["Low", "Normal", "High", "Critical"]}
+              width={120}
+            />
+          </FormRow>
+          <FormRow label="Express?">
+            <Switch on={form.express} onChange={(v) => setForm({ ...form, express: v })} />
+            <span style={{ marginLeft: 6, fontSize: 10, color: "var(--fg-muted)" }}>
+              {form.express ? "On — surcharge applied" : "Off"}
+            </span>
+          </FormRow>
+          <FormRow label="Status">
+            <Tag tone="warning">Pending posting</Tag>
+          </FormRow>
+        </Form>
+      </Fieldset>
+
+      <div style={{ gridColumn: "1 / -1" }}>
+        <Fieldset legend="Customer">
+          <Form columns="100px 1fr 100px 1fr">
+            <FormRow label="Customer No.">
+              <Input value="6000068250" width={120} />
+            </FormRow>
+            <FormRow label="Name">
+              <Input value="ACME Industrial Logistics GmbH" width={260} />
+            </FormRow>
+            <FormRow label="Tax ID">
+              <Input value="DE123456789" width={120} />
+            </FormRow>
+            <FormRow label="Payment">
+              <Select value="Net 30" onChange={() => {}} options={["Net 14", "Net 30", "Net 60", "Prepaid"]} width={140} />
+            </FormRow>
+          </Form>
+        </Fieldset>
+      </div>
+    </div>
+  );
+}
+
+function ItemsTab({ rows, selected, setSelected, hovered, setHovered }) {
+  const { DataTable, Tag } = window.SAP;
+  const cols = [
+    { key: "doc", label: "Document", width: 110 },
+    { key: "material", label: "Material" },
+    { key: "qty", label: "Qty", align: "right", numeric: true, width: 60 },
+    { key: "uom", label: "UoM", width: 50 },
+    { key: "price", label: "Unit Price", align: "right", numeric: true, width: 100,
+      render: (r) => r.price.toLocaleString("en-US", { minimumFractionDigits: 2 }) },
+    { key: "total", label: "Amount", align: "right", numeric: true, width: 110,
+      render: (r) => (r.qty * r.price).toLocaleString("en-US", { minimumFractionDigits: 2 }) },
+    { key: "status", label: "Status", width: 90,
+      render: (r) => <Tag tone={r.statusTone}>{r.status}</Tag> },
+  ];
+  return (
+    <DataTable
+      columns={cols}
+      rows={rows}
+      selectedIds={selected}
+      hoveredId={hovered}
+      onHover={setHovered}
+      onSelect={(id) => {
+        const next = new Set(selected);
+        next.has(id) ? next.delete(id) : next.add(id);
+        setSelected(next);
+      }}
+      getId={(r) => r.id}
+    />
+  );
+}
+
+function DocumentsTab() {
+  const { ico } = window.SAP;
+  return (
+    <div style={{
+      background: "var(--surface-inset)",
+      boxShadow: "var(--bevel-in-strong)",
+      minHeight: 200,
+      display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6,
+      color: "var(--fg-muted)",
+      padding: 20,
+    }}>
+      <div style={{ width: 48, height: 48, background: "var(--surface-2)", boxShadow: "var(--bevel-in)",
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {ico("document", 32)}
+      </div>
+      <div style={{ fontWeight: 700 }}>No Documents</div>
+      <div style={{ fontSize: 10 }}>Attach a delivery note, invoice, or photo to this shipment.</div>
+      <button className="sap-btn" style={{ marginTop: 6 }}>{ico("attach")}<span style={{marginLeft:4}}>Attach…</span></button>
+    </div>
+  );
+}
+
+function App() {
+  const { Window, Toolbar, TabStrip, Dialog, Button, ico } = window.SAP;
+
+  const [tab, setTab] = useState("header");
+  const [dialog, setDialog] = useState(null);
+  const [statusMsg, setStatusMsg] = useState("Ready.");
+  const [hovered, setHovered] = useState(null);
+  const [selected, setSelected] = useState(new Set([3]));
+
+  const [form, setForm] = useState({
+    id: "0000080014",
+    carrier: "DHL Freight",
+    service: "Standard",
+    route: "DE-HAM → FR-LYO",
+    pickup: "2026-03-17",
+    delivery: "2026-03-21",
+    priority: "Normal",
+    express: false,
+  });
+
+  const rows = useMemo(() => ([
+    { id: 1, doc: "10000234", material: "Steel beam I-200",  qty: 12, uom: "EA", price: 348.50, status: "Open",  statusTone: "default" },
+    { id: 2, doc: "10000235", material: "Pallet hardwood",    qty: 24, uom: "EA", price:  85.00, status: "Open",  statusTone: "default" },
+    { id: 3, doc: "10000236", material: "Hydraulic fluid 20L", qty:  8, uom: "EA", price: 142.75, status: "Hold",  statusTone: "warning" },
+    { id: 4, doc: "10000237", material: "Bolt M12×50 (box 100)", qty: 50, uom: "BX", price:  18.40, status: "Open",  statusTone: "default" },
+    { id: 5, doc: "10000238", material: "Insulation foam roll", qty:  6, uom: "EA", price:  92.00, status: "Error", statusTone: "error" },
+    { id: 6, doc: "10000239", material: "Cable harness 12m",   qty:  4, uom: "EA", price: 230.10, status: "Open",  statusTone: "default" },
+  ]), []);
+
+  const total = useMemo(() => rows.reduce((s, r) => s + r.qty * r.price, 0), [rows]);
+
+  const toolbar = (
+    <Toolbar
+      groups={[
+        [
+          { icon: "new",     onClick: () => setStatusMsg("New shipment template loaded.") },
+          { icon: "open",    onClick: () => setStatusMsg("Open document…") },
+          { icon: "save",    onClick: () => setStatusMsg("Document saved successfully — 0000080014") },
+        ],
+        [
+          { icon: "print",   onClick: () => setStatusMsg("Sent to printer LP-WAREHOUSE-01") },
+          { icon: "find",    onClick: () => setStatusMsg("Find: open dialog…") },
+        ],
+        [
+          { icon: "back" },
+          { icon: "forward" },
+          { icon: "up" },
+        ],
+        [
+          { icon: "execute", label: "Execute", onClick: () => setStatusMsg("F8 — execute transaction") },
+          { icon: "refresh", onClick: () => setStatusMsg("Refreshed.") },
+          {
+            icon: "delete",
+            onClick: () => setDialog({
+              kind: "confirm",
+              title: "Confirm Delete",
+              icon: "warning",
+              body: <>Delete shipment <b>0000080014</b>? This action cannot be undone.</>,
+              buttons: [
+                { label: "OK", onClick: () => { setDialog(null); setStatusMsg("Document 0000080014 deleted."); } },
+                { label: "Cancel", onClick: () => setDialog(null) },
+              ],
+            }),
+          },
+        ],
+        [
+          { icon: "table",   onClick: () => setStatusMsg("Table settings opened.") },
+          { icon: "filter",  onClick: () => setStatusMsg("Filter applied: status=Open") },
+          { icon: "sort",    onClick: () => setStatusMsg("Sorted by Document") },
+          { icon: "export",  onClick: () => setStatusMsg("Exported to spreadsheet.") },
+        ],
+        [
+          { icon: "help",
+            onClick: () => setDialog({
+              kind: "info",
+              title: "Help — Shipment Maintenance",
+              icon: "info",
+              body: (
+                <div>
+                  <b>Transaction VL01N</b><br/>
+                  Maintain outbound shipment headers, items, and attached documents.
+                  Press <b>F8</b> to execute, <b>Ctrl+S</b> to save, <b>Shift+F2</b> to delete.
+                </div>
+              ),
+              buttons: [{ label: "OK", onClick: () => setDialog(null) }],
+            }),
+          },
+        ],
+      ]}
+    />
+  );
+
+  return (
+    <div style={{ height: "100%", padding: 6 }}>
+      <Window
+        title="SAP — Shipment: Display 0000080014"
+        menu={[
+          { label: "<u>S</u>hipment" },
+          { label: "<u>E</u>dit" },
+          { label: "<u>G</u>oto" },
+          { label: "S<u>y</u>stem" },
+          { label: "<u>H</u>elp" },
+        ]}
+        toolbar={toolbar}
+        statusLeft={<><b>{statusMsg}</b></>}
+        statusRight={<>VL01N · MUC-PRD-01 · 14:55:1293</>}
+      >
+        <div className="page-banner">
+          {ico("info", 14)}
+          <span>You are viewing this document in <b>Display</b> mode. Switch to <a className="sap-link" onClick={() => setStatusMsg("Switched to Change mode.")}>Change</a> to edit.</span>
+        </div>
+
+        <div className="crumb">
+          <div className="sap-crumbs">
+            <a className="sap-link">Home</a><span className="sep">›</span>
+            <a className="sap-link">Logistics</a><span className="sep">›</span>
+            <a className="sap-link">Shipment</a><span className="sep">›</span>
+            <span><b>0000080014</b></span>
+          </div>
+        </div>
+
+        <div style={{ marginBottom: 4 }}>
+          <TabStrip
+            active={tab}
+            onChange={setTab}
+            tabs={[
+              { id: "header", label: "Header" },
+              { id: "items", label: `Items (${rows.length})` },
+              { id: "documents", label: "Documents" },
+              { id: "log", label: "Log", disabled: true },
+            ]}
+          />
+        </div>
+
+        <div className="panel">
+          <div className="panel-body">
+            {tab === "header" && <HeaderTab form={form} setForm={setForm} />}
+            {tab === "items" && <ItemsTab rows={rows} selected={selected} setSelected={setSelected} hovered={hovered} setHovered={setHovered} />}
+            {tab === "documents" && <DocumentsTab />}
+          </div>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 6 }}>
+          <div style={{ fontSize: 10, color: "var(--fg-muted)" }}>
+            {tab === "items" && (
+              <>Selected: <b>{selected.size}</b> of {rows.length} rows · Total amount: <b style={{ fontVariantNumeric: "tabular-nums" }}>{total.toLocaleString("en-US", { minimumFractionDigits: 2 })} EUR</b></>
+            )}
+          </div>
+          <div style={{ display: "flex", gap: 4 }}>
+            <Button onClick={() => setStatusMsg("Document saved successfully — 0000080014")}>{ico("save")}<span style={{marginLeft:4}}>Save</span></Button>
+            <Button onClick={() => setStatusMsg("Returned to selection screen.")}>{ico("back")}<span style={{marginLeft:4}}>Back</span></Button>
+            <Button onClick={() => setStatusMsg("Cancel — changes discarded.")}>Cancel</Button>
+          </div>
+        </div>
+
+        <Dialog
+          open={!!dialog}
+          title={dialog?.title}
+          icon={dialog?.icon}
+          buttons={dialog?.buttons || []}
+          onClose={() => setDialog(null)}
+        >
+          {dialog?.body}
+        </Dialog>
+      </Window>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>

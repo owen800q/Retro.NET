@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Colors" name="Colors — Accent (SAP amber)" subtitle="Selection, focus, primary highlight" viewport="700x140" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 16px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .sw  { height: 86px; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 var(--border-dark), 0 0 0 1px #000; padding: 6px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .name { font-weight: 700; }
+  .hex  { font-family: var(--font-mono); font-size: 10px; opacity: .8; }
+  .dark .name, .dark .hex { color:#fff; text-shadow: 0 1px 0 rgba(0,0,0,.4); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="sw dark" style="background:var(--accent)"><div class="name">accent</div><div class="hex">#F0AB00</div></div>
+    <div class="sw dark" style="background:var(--accent-2)"><div class="name">accent-2</div><div class="hex">#E8A100</div></div>
+    <div class="sw" style="background:var(--accent-soft)"><div class="name">accent-soft</div><div class="hex">#FFE8A8</div></div>
+    <div class="sw" style="background:var(--accent-pale)"><div class="name">accent-pale</div><div class="hex">#FFF6D9</div></div>
+  </div>
+</body></html>

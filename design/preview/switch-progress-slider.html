@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Switch / Progress / Slider" subtitle="On/off, barber-pole, slider" viewport="700x110" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:16px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .col { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .lbl { font-size: 10px; color: var(--fg-muted); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="col"><span class="sap-switch is-on"></span><div class="lbl">On</div></div>
+    <div class="col"><span class="sap-switch"></span><div class="lbl">Off</div></div>
+    <div class="col"><span class="sap-switch is-disabled"></span><div class="lbl">Disabled</div></div>
+    <div class="col" style="margin-left: 24px">
+      <div class="sap-progress" style="width: 200px"><div class="bar" style="width: 60%"></div></div>
+      <div class="lbl">Progress 60%</div>
+    </div>
+    <div class="col">
+      <div class="sap-slider" style="width: 160px"><div class="track"></div><div class="thumb" style="left: 60%"></div></div>
+      <div class="lbl">Slider</div>
+    </div>
+  </div>
+</body></html>

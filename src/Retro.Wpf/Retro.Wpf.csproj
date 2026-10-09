@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net462;net8.0-windows;net10.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Retro.Wpf</RootNamespace>
+    <AssemblyName>Retro.Wpf</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+    <PackageId>Retro.NET</PackageId>
+    <Title>Retro.NET — Retro SAP GUI theme for WPF</Title>
+    <Description>A pixel-faithful retro enterprise (classic SAP GUI / Windows 9x) theme and control library for WPF: 1px two-tone bevels, MS Sans Serif type, steel-blue chrome with amber selection. Restyles all standard WPF controls and adds RetroWindow, Bevel, ToggleSwitch, Tag, MessageStrip, Badge, Avatar, Breadcrumb, Pagination, FormField, Timeline, EmptyState, RetroMessageBox and a 44-icon pixel icon set.</Description>
+    <PackageTags>wpf;theme;retro;sap-gui;windows95;win9x;bevel;controls;xaml;skin</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/owen800q/Retro.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/owen800q/Retro.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,127 @@
+<!-- CheckBox and RadioButton. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctl="clr-namespace:Retro.Wpf.Controls">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Shared.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <Style x:Key="Retro.ToggleBase" TargetType="ToggleButton">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.SurfaceInset}"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="UseLayoutRounding" Value="True"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Padding" Value="4,0,0,0"/>
+    <Setter Property="FocusVisualStyle" Value="{StaticResource Retro.FocusVisual.Content}"/>
+  </Style>
+
+  <!-- 13px sunken box (+1px black outline), pixel check mark. -->
+  <Style TargetType="CheckBox" BasedOn="{StaticResource Retro.ToggleBase}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CheckBox">
+          <Grid Background="Transparent">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ctl:Bevel x:Name="Box" Kind="SunkenStrong" Width="15" Height="15" VerticalAlignment="Center"
+                       Background="{TemplateBinding Background}"
+                       LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"
+                       OutlineBrush="{DynamicResource Retro.BorderBlack}">
+              <Grid>
+                <Path x:Name="Check" Data="{StaticResource Retro.Glyph.Check}" Fill="{DynamicResource Retro.Foreground}"
+                      Stretch="None" Margin="2,2,0,0" Visibility="Collapsed" SnapsToDevicePixels="True"/>
+                <Rectangle x:Name="Indeterminate" Width="5" Height="5" Fill="{DynamicResource Retro.Foreground}" Visibility="Collapsed"/>
+              </Grid>
+            </ctl:Bevel>
+            <ContentPresenter x:Name="Content" Grid.Column="1" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="HasContent" Value="False">
+              <Setter TargetName="Content" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+              <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="{x:Null}">
+              <Setter TargetName="Indeterminate" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Box" Property="Background" Value="{DynamicResource Retro.AccentSoft}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="Box" Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+              <Setter TargetName="Box" Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+              <Setter TargetName="Check" Property="Fill" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+              <Setter TargetName="Indeterminate" Property="Fill" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Round sunken well: black ring, dark/white bevel halves, white interior, 5px dot. -->
+  <Style TargetType="RadioButton" BasedOn="{StaticResource Retro.ToggleBase}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RadioButton">
+          <Grid Background="Transparent">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Width="15" Height="15" VerticalAlignment="Center">
+              <Ellipse Fill="{DynamicResource Retro.BorderBlack}"/>
+              <Ellipse Margin="1">
+                <Ellipse.Fill>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="{StaticResource Retro.BorderDarkColor}"/>
+                    <GradientStop Offset="0.5" Color="{StaticResource Retro.BorderDarkColor}"/>
+                    <GradientStop Offset="0.5" Color="{StaticResource Retro.BorderLightColor}"/>
+                    <GradientStop Offset="1" Color="{StaticResource Retro.BorderLightColor}"/>
+                  </LinearGradientBrush>
+                </Ellipse.Fill>
+              </Ellipse>
+              <Ellipse x:Name="Well" Margin="2" Fill="{TemplateBinding Background}"/>
+              <Ellipse x:Name="Dot" Width="5" Height="5" Fill="{DynamicResource Retro.Foreground}" Visibility="Collapsed"/>
+            </Grid>
+            <ContentPresenter x:Name="Content" Grid.Column="1" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="HasContent" Value="False">
+              <Setter TargetName="Content" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+              <Setter TargetName="Dot" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Well" Property="Fill" Value="{DynamicResource Retro.AccentSoft}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="Well" Property="Fill" Value="{DynamicResource Retro.Surface2}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+              <Setter TargetName="Well" Property="Fill" Value="{DynamicResource Retro.Surface2}"/>
+              <Setter TargetName="Dot" Property="Fill" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

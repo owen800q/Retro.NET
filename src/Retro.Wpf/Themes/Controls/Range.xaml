@@ -1,0 +1,335 @@
+<!-- ProgressBar, Slider, ScrollBar, ScrollViewer. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctl="clr-namespace:Retro.Wpf.Controls">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Shared.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- ===== ProgressBar: sunken white well with blue barber stripes ====== -->
+  <Style TargetType="ProgressBar">
+    <Setter Property="Height" Value="14"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.SurfaceInset}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Brush.ProgressStripes}"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="UseLayoutRounding" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ProgressBar">
+          <ctl:Bevel Kind="Sunken" Background="{TemplateBinding Background}"
+                     LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}">
+            <Grid x:Name="PART_Track" ClipToBounds="True">
+              <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="{TemplateBinding Foreground}"/>
+              <Rectangle x:Name="Indeterminate" Visibility="Collapsed">
+                <Rectangle.Fill>
+                  <LinearGradientBrush MappingMode="Absolute" SpreadMethod="Repeat" StartPoint="0,0" EndPoint="10,0">
+                    <GradientStop Offset="0" Color="{StaticResource Retro.HeaderBlue2Color}"/>
+                    <GradientStop Offset="0.6" Color="{StaticResource Retro.HeaderBlue2Color}"/>
+                    <GradientStop Offset="0.6" Color="{StaticResource Retro.HeaderBlue3Color}"/>
+                    <GradientStop Offset="1" Color="{StaticResource Retro.HeaderBlue3Color}"/>
+                    <GradientBrush.Transform>
+                      <TranslateTransform X="0"/>
+                    </GradientBrush.Transform>
+                  </LinearGradientBrush>
+                </Rectangle.Fill>
+              </Rectangle>
+            </Grid>
+          </ctl:Bevel>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+              <Setter TargetName="PART_Track" Property="LayoutTransform">
+                <Setter.Value>
+                  <RotateTransform Angle="-90"/>
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="IsIndeterminate" Value="True">
+              <Setter TargetName="PART_Indicator" Property="Visibility" Value="Collapsed"/>
+              <Setter TargetName="Indeterminate" Property="Visibility" Value="Visible"/>
+              <Trigger.EnterActions>
+                <BeginStoryboard x:Name="Barber">
+                  <Storyboard RepeatBehavior="Forever">
+                    <!-- The only motion in the system: linear, no easing. -->
+                    <DoubleAnimation Storyboard.TargetName="Indeterminate"
+                                     Storyboard.TargetProperty="(Shape.Fill).(Brush.Transform).(TranslateTransform.X)"
+                                     From="0" To="10" Duration="0:0:0.5"/>
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <StopStoryboard BeginStoryboardName="Barber"/>
+              </Trigger.ExitActions>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="Orientation" Value="Vertical">
+        <Setter Property="Height" Value="NaN"/>
+        <Setter Property="Width" Value="14"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <!-- ===== Slider ======================================================= -->
+  <Style x:Key="Retro.SliderPageButton" TargetType="RepeatButton">
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="IsTabStop" Value="False"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RepeatButton">
+          <Border Background="Transparent"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="Retro.SliderThumb" TargetType="Thumb">
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Thumb">
+          <ctl:Bevel x:Name="Bevel" Kind="RaisedStrong" Background="{DynamicResource Retro.Gradient.Button}"
+                     LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"
+                     OutlineBrush="{DynamicResource Retro.BorderBlack}"/>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Bevel" Property="Background" Value="{DynamicResource Retro.Gradient.ButtonHover}"/>
+            </Trigger>
+            <Trigger Property="IsDragging" Value="True">
+              <Setter TargetName="Bevel" Property="Background" Value="{DynamicResource Retro.Gradient.ButtonPressed}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Bevel" Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+              <Setter TargetName="Bevel" Property="OutlineBrush" Value="{DynamicResource Retro.BorderDark}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <ControlTemplate x:Key="Retro.SliderHorizontal" TargetType="Slider">
+    <Grid MinHeight="18" Background="Transparent">
+      <ctl:Bevel x:Name="TrackBar" Kind="Sunken" Height="4" Margin="6,0" VerticalAlignment="Center"
+                 Background="{DynamicResource Retro.Surface2}"
+                 LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"/>
+      <Track x:Name="PART_Track">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.SliderPageButton}" Command="{x:Static Slider.DecreaseLarge}"/>
+        </Track.DecreaseRepeatButton>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.SliderPageButton}" Command="{x:Static Slider.IncreaseLarge}"/>
+        </Track.IncreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb x:Name="Thumb" Style="{StaticResource Retro.SliderThumb}" Width="12" Height="18"/>
+        </Track.Thumb>
+      </Track>
+    </Grid>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="Retro.SliderVertical" TargetType="Slider">
+    <Grid MinWidth="18" Background="Transparent">
+      <ctl:Bevel Kind="Sunken" Width="4" Margin="0,6" HorizontalAlignment="Center"
+                 Background="{DynamicResource Retro.Surface2}"
+                 LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"/>
+      <Track x:Name="PART_Track" IsDirectionReversed="True">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.SliderPageButton}" Command="{x:Static Slider.DecreaseLarge}"/>
+        </Track.DecreaseRepeatButton>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.SliderPageButton}" Command="{x:Static Slider.IncreaseLarge}"/>
+        </Track.IncreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb Style="{StaticResource Retro.SliderThumb}" Width="18" Height="12"/>
+        </Track.Thumb>
+      </Track>
+    </Grid>
+  </ControlTemplate>
+
+  <Style TargetType="Slider">
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="UseLayoutRounding" Value="True"/>
+    <Setter Property="FocusVisualStyle" Value="{StaticResource Retro.FocusVisual.Tight}"/>
+    <Setter Property="Template" Value="{StaticResource Retro.SliderHorizontal}"/>
+    <Style.Triggers>
+      <Trigger Property="Orientation" Value="Vertical">
+        <Setter Property="Template" Value="{StaticResource Retro.SliderVertical}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <!-- ===== ScrollBar: classic 16px bar with arrow buttons and dithered track === -->
+  <Style x:Key="Retro.ScrollArrow" TargetType="RepeatButton">
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="IsTabStop" Value="False"/>
+    <Setter Property="Width" Value="16"/>
+    <Setter Property="Height" Value="16"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RepeatButton">
+          <ctl:Bevel x:Name="Bevel" Kind="RaisedStrong" Background="{DynamicResource Retro.Gradient.Button}"
+                     LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"
+                     OutlineBrush="{DynamicResource Retro.BorderDark}">
+            <ContentPresenter x:Name="Glyph" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </ctl:Bevel>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Bevel" Property="Background" Value="{DynamicResource Retro.Gradient.ButtonHover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="Bevel" Property="Kind" Value="SunkenStrong"/>
+              <Setter TargetName="Glyph" Property="RenderTransform">
+                <Setter.Value>
+                  <TranslateTransform X="1" Y="1"/>
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Glyph" Property="Opacity" Value="0.4"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="Retro.ScrollPage" TargetType="RepeatButton">
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="IsTabStop" Value="False"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RepeatButton">
+          <Border Background="Transparent"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="Retro.ScrollThumb" TargetType="Thumb">
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="IsTabStop" Value="False"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Thumb">
+          <ctl:Bevel x:Name="Bevel" Kind="RaisedStrong" Background="{DynamicResource Retro.Gradient.Button}"
+                     LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"
+                     OutlineBrush="{DynamicResource Retro.BorderDark}"/>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Bevel" Property="Background" Value="{DynamicResource Retro.Gradient.ButtonHover}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <ControlTemplate x:Key="Retro.VerticalScrollBar" TargetType="ScrollBar">
+    <Grid Background="{DynamicResource Retro.Brush.ScrollTrack}">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="16"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="16"/>
+      </Grid.RowDefinitions>
+      <RepeatButton Style="{StaticResource Retro.ScrollArrow}" Command="{x:Static ScrollBar.LineUpCommand}">
+        <Path Data="{StaticResource Retro.Glyph.ArrowUp}" Fill="{DynamicResource Retro.Foreground}" Stretch="None"/>
+      </RepeatButton>
+      <Track x:Name="PART_Track" Grid.Row="1" IsDirectionReversed="True">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.ScrollPage}" Command="{x:Static ScrollBar.PageUpCommand}"/>
+        </Track.DecreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb Style="{StaticResource Retro.ScrollThumb}" MinHeight="12"/>
+        </Track.Thumb>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.ScrollPage}" Command="{x:Static ScrollBar.PageDownCommand}"/>
+        </Track.IncreaseRepeatButton>
+      </Track>
+      <RepeatButton Grid.Row="2" Style="{StaticResource Retro.ScrollArrow}" Command="{x:Static ScrollBar.LineDownCommand}">
+        <Path Data="{StaticResource Retro.Glyph.ArrowDown}" Fill="{DynamicResource Retro.Foreground}" Stretch="None"/>
+      </RepeatButton>
+    </Grid>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="Retro.HorizontalScrollBar" TargetType="ScrollBar">
+    <Grid Background="{DynamicResource Retro.Brush.ScrollTrack}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="16"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="16"/>
+      </Grid.ColumnDefinitions>
+      <RepeatButton Style="{StaticResource Retro.ScrollArrow}" Command="{x:Static ScrollBar.LineLeftCommand}">
+        <Path Data="{StaticResource Retro.Glyph.ArrowLeft}" Fill="{DynamicResource Retro.Foreground}" Stretch="None"/>
+      </RepeatButton>
+      <Track x:Name="PART_Track" Grid.Column="1">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.ScrollPage}" Command="{x:Static ScrollBar.PageLeftCommand}"/>
+        </Track.DecreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb Style="{StaticResource Retro.ScrollThumb}" MinWidth="12"/>
+        </Track.Thumb>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Style="{StaticResource Retro.ScrollPage}" Command="{x:Static ScrollBar.PageRightCommand}"/>
+        </Track.IncreaseRepeatButton>
+      </Track>
+      <RepeatButton Grid.Column="2" Style="{StaticResource Retro.ScrollArrow}" Command="{x:Static ScrollBar.LineRightCommand}">
+        <Path Data="{StaticResource Retro.Glyph.ArrowRight}" Fill="{DynamicResource Retro.Foreground}" Stretch="None"/>
+      </RepeatButton>
+    </Grid>
+  </ControlTemplate>
+
+  <Style TargetType="ScrollBar">
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="UseLayoutRounding" Value="True"/>
+    <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False"/>
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+    <Setter Property="Width" Value="16"/>
+    <Setter Property="MinWidth" Value="16"/>
+    <Setter Property="Template" Value="{StaticResource Retro.VerticalScrollBar}"/>
+    <Style.Triggers>
+      <Trigger Property="Orientation" Value="Horizontal">
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="MinHeight" Value="16"/>
+        <Setter Property="Template" Value="{StaticResource Retro.HorizontalScrollBar}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="ScrollViewer">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ScrollViewer">
+          <Grid Background="{TemplateBinding Background}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="{TemplateBinding Padding}"
+                                    CanContentScroll="{TemplateBinding CanContentScroll}"
+                                    CanHorizontallyScroll="False" CanVerticallyScroll="False"
+                                    Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="1" Orientation="Vertical" Cursor="Arrow"
+                       Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}"
+                       Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+            <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Row="1" Orientation="Horizontal" Cursor="Arrow"
+                       Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}"
+                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+            <Rectangle Grid.Row="1" Grid.Column="1" Fill="{DynamicResource Retro.Surface}"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

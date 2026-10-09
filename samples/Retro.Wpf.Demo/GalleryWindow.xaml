@@ -1,0 +1,11 @@
+<retro:RetroWindow x:Class="Retro.Wpf.Demo.GalleryWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:retro="https://github.com/owen800q/Retro.NET"
+                   xmlns:local="clr-namespace:Retro.Wpf.Demo"
+                   Title="Retro GUI — Component Gallery" TitleIcon="Table"
+                   Width="1180" Height="820" WindowStartupLocation="CenterOwner">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <local:GalleryView/>
+  </ScrollViewer>
+</retro:RetroWindow>

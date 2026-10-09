@@ -1,0 +1,23 @@
+<!--
+  The complete Retro theme. Merge it once in App.xaml (or use <retro:RetroTheme/>):
+    <ResourceDictionary Source="pack://application:,,,/Retro.Wpf;component/Themes/Retro.xaml"/>
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Tokens.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Icons.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Shared.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Text.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Buttons.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Inputs.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Selection.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Containers.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Lists.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/DataGrid.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Range.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Menus.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Bars.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Calendar.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

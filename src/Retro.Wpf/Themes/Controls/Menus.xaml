@@ -1,0 +1,238 @@
+<!-- Menu bar, MenuItem, ContextMenu, Separator, ToolTip. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:retro="clr-namespace:Retro.Wpf"
+                    xmlns:ctl="clr-namespace:Retro.Wpf.Controls">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Shared.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- ===== Separators: etched line (dark over white) ==================== -->
+  <Style TargetType="Separator">
+    <Setter Property="Margin" Value="0,2"/>
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Separator">
+          <Border Height="2" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Retro.BorderDark}" Background="{DynamicResource Retro.BorderLight}"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator" BasedOn="{StaticResource {x:Type Separator}}"/>
+
+  <!-- Vertical etched separator (toolbars, status bars). -->
+  <Style x:Key="Retro.VerticalSeparator" TargetType="Separator">
+    <Setter Property="Margin" Value="3,0"/>
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Separator">
+          <Border Width="2" Height="18" BorderThickness="1,0,0,0" BorderBrush="{DynamicResource Retro.BorderDark}" Background="{DynamicResource Retro.BorderLight}"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ===== Menu bar ===================================================== -->
+  <Style TargetType="Menu">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+    <Setter Property="Padding" Value="2,1"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Menu">
+          <Border Background="{TemplateBinding Background}" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Retro.BorderMid}"
+                  Padding="{TemplateBinding Padding}">
+            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Drop-down panel shared by submenus and context menus. -->
+  <Style x:Key="Retro.MenuPanel" TargetType="ctl:Bevel">
+    <Setter Property="Kind" Value="RaisedStrong"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+    <Setter Property="Padding" Value="1"/>
+    <Setter Property="DropShadow" Value="1"/>
+    <Setter Property="DropShadowBrush" Value="{DynamicResource Retro.DropShadow}"/>
+    <Setter Property="LightBrush" Value="{DynamicResource Retro.BorderLight}"/>
+    <Setter Property="DarkBrush" Value="{DynamicResource Retro.BorderDark}"/>
+    <Setter Property="OutlineBrush" Value="{DynamicResource Retro.BorderBlack}"/>
+    <Setter Property="Margin" Value="0,0,1,1"/>
+    <Setter Property="MinWidth" Value="160"/>
+  </Style>
+
+  <!-- Top-level items: "Shipment  Edit  Goto ..." -->
+  <ControlTemplate x:Key="Retro.TopLevelMenuItem" TargetType="MenuItem">
+    <Border x:Name="Bd" Background="Transparent" Padding="8,2,8,3">
+      <Grid>
+        <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"/>
+        <Popup x:Name="PART_Popup" Placement="Bottom" AllowsTransparency="True" Focusable="False" PopupAnimation="None"
+               IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" VerticalOffset="1" HorizontalOffset="-8">
+          <ctl:Bevel Style="{StaticResource Retro.MenuPanel}">
+            <ScrollViewer CanContentScroll="True">
+              <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" KeyboardNavigation.TabNavigation="Cycle"
+                              Grid.IsSharedSizeScope="True"/>
+            </ScrollViewer>
+          </ctl:Bevel>
+        </Popup>
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsHighlighted" Value="True">
+        <Setter TargetName="Bd" Property="Background" Value="{DynamicResource Retro.HeaderBlue2}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundOnHeader}"/>
+      </Trigger>
+      <Trigger Property="IsSubmenuOpen" Value="True">
+        <Setter TargetName="Bd" Property="Background" Value="{DynamicResource Retro.HeaderBlue2}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundOnHeader}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <!-- Items inside a drop-down: icon gutter, label, gesture text, submenu arrow. -->
+  <ControlTemplate x:Key="Retro.SubmenuItem" TargetType="MenuItem">
+    <Border x:Name="Bd" Background="Transparent" Padding="0,3">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="22"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="RetroMenuGesture"/>
+          <ColumnDefinition Width="16"/>
+        </Grid.ColumnDefinitions>
+        <ContentPresenter x:Name="IconSite" ContentSource="Icon" Width="14" Height="14" Margin="4,0" VerticalAlignment="Center"/>
+        <ctl:RetroIcon x:Name="AssistIcon" Size="14" Margin="4,0" VerticalAlignment="Center" Visibility="Collapsed"
+                       Kind="{Binding (retro:Assist.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Retro.NullSkip}}"/>
+        <Path x:Name="CheckMark" Data="{StaticResource Retro.Glyph.Check}" Fill="{TemplateBinding Foreground}"
+              Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <ContentPresenter Grid.Column="1" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
+        <TextBlock x:Name="Gesture" Grid.Column="2" Text="{TemplateBinding InputGestureText}" Margin="16,0,0,0"
+                   FontSize="{DynamicResource Retro.FontSize.XS}" Foreground="{DynamicResource Retro.ForegroundMuted}"
+                   VerticalAlignment="Center"/>
+        <Path x:Name="Arrow" Grid.Column="3" Data="{StaticResource Retro.Glyph.ArrowRight}" Fill="{TemplateBinding Foreground}"
+              Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <Popup x:Name="PART_Popup" Placement="Right" AllowsTransparency="True" Focusable="False" PopupAnimation="None"
+               IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" HorizontalOffset="-2" VerticalOffset="-4">
+          <ctl:Bevel Style="{StaticResource Retro.MenuPanel}">
+            <ScrollViewer CanContentScroll="True">
+              <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" KeyboardNavigation.TabNavigation="Cycle"
+                              Grid.IsSharedSizeScope="True"/>
+            </ScrollViewer>
+          </ctl:Bevel>
+        </Popup>
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="Role" Value="SubmenuHeader">
+        <Setter TargetName="Arrow" Property="Visibility" Value="Visible"/>
+      </Trigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="Icon" Value="{x:Null}"/>
+          <Condition Property="IsChecked" Value="False"/>
+        </MultiTrigger.Conditions>
+        <Setter TargetName="AssistIcon" Property="Visibility" Value="Visible"/>
+      </MultiTrigger>
+      <Trigger Property="retro:Assist.Icon" Value="{x:Null}">
+        <Setter TargetName="AssistIcon" Property="Visibility" Value="Collapsed"/>
+      </Trigger>
+      <Trigger Property="IsChecked" Value="True">
+        <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+        <Setter TargetName="IconSite" Property="Visibility" Value="Collapsed"/>
+      </Trigger>
+      <Trigger Property="IsHighlighted" Value="True">
+        <Setter TargetName="Bd" Property="Background" Value="{DynamicResource Retro.HeaderBlue2}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundOnHeader}"/>
+        <Setter TargetName="Gesture" Property="Foreground" Value="{DynamicResource Retro.ForegroundOnHeader}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+        <Setter TargetName="Bd" Property="Background" Value="Transparent"/>
+        <Setter TargetName="Gesture" Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+        <Setter TargetName="IconSite" Property="Opacity" Value="0.45"/>
+        <Setter TargetName="AssistIcon" Property="Opacity" Value="0.45"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <Style TargetType="MenuItem">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template" Value="{StaticResource Retro.SubmenuItem}"/>
+    <Style.Triggers>
+      <Trigger Property="Role" Value="TopLevelHeader">
+        <Setter Property="Template" Value="{StaticResource Retro.TopLevelMenuItem}"/>
+      </Trigger>
+      <Trigger Property="Role" Value="TopLevelItem">
+        <Setter Property="Template" Value="{StaticResource Retro.TopLevelMenuItem}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="ContextMenu">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="HasDropShadow" Value="False"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ContextMenu">
+          <ctl:Bevel Style="{StaticResource Retro.MenuPanel}">
+            <ScrollViewer CanContentScroll="True">
+              <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"/>
+            </ScrollViewer>
+          </ctl:Bevel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ===== ToolTip: pale yellow, 1px black ============================== -->
+  <Style TargetType="ToolTip">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.TooltipBackground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource Retro.BorderBlack}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="5,2"/>
+    <Setter Property="MaxWidth" Value="260"/>
+    <Setter Property="HasDropShadow" Value="False"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ToolTip">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+            <ContentPresenter>
+              <ContentPresenter.Resources>
+                <Style TargetType="TextBlock">
+                  <Setter Property="TextWrapping" Value="Wrap"/>
+                </Style>
+              </ContentPresenter.Resources>
+            </ContentPresenter>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

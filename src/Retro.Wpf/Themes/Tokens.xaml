@@ -1,0 +1,185 @@
+<!--
+  Retro SAP GUI design tokens (mirrors design/colors_and_type.css).
+  Every brush is keyed "Retro.*" and can be overridden in application resources.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+  <!-- ===== Colors ======================================================= -->
+  <!-- Surfaces -->
+  <Color x:Key="Retro.SurfaceColor">#D6E4F1</Color>
+  <Color x:Key="Retro.Surface2Color">#EAF1F8</Color>
+  <Color x:Key="Retro.Surface3Color">#F5F8FB</Color>
+  <Color x:Key="Retro.SurfaceInsetColor">#FFFFFF</Color>
+  <Color x:Key="Retro.SurfaceToolbarColor">#DCE6F2</Color>
+  <!-- Title bar / header -->
+  <Color x:Key="Retro.HeaderBlue1Color">#003D7A</Color>
+  <Color x:Key="Retro.HeaderBlue2Color">#2A6FB8</Color>
+  <Color x:Key="Retro.HeaderBlue3Color">#4A7FB8</Color>
+  <Color x:Key="Retro.HeaderGlossColor">#6FA3D6</Color>
+  <Color x:Key="Retro.TitleBarBorderColor">#001E3F</Color>
+  <!-- Accent -->
+  <Color x:Key="Retro.AccentColor">#F0AB00</Color>
+  <Color x:Key="Retro.Accent2Color">#E8A100</Color>
+  <Color x:Key="Retro.AccentSoftColor">#FFE8A8</Color>
+  <Color x:Key="Retro.AccentPaleColor">#FFF6D9</Color>
+  <!-- Borders -->
+  <Color x:Key="Retro.BorderLightColor">#FFFFFF</Color>
+  <Color x:Key="Retro.BorderMidColor">#A6B4C5</Color>
+  <Color x:Key="Retro.BorderDarkColor">#6E7A89</Color>
+  <Color x:Key="Retro.BorderDarkerColor">#4A5566</Color>
+  <Color x:Key="Retro.BorderBlackColor">#000000</Color>
+  <!-- Text -->
+  <Color x:Key="Retro.ForegroundColor">#000000</Color>
+  <Color x:Key="Retro.ForegroundMutedColor">#4A5566</Color>
+  <Color x:Key="Retro.ForegroundDisabledColor">#8A95A5</Color>
+  <Color x:Key="Retro.ForegroundOnAccentColor">#000000</Color>
+  <Color x:Key="Retro.ForegroundOnHeaderColor">#FFFFFF</Color>
+  <!-- Links -->
+  <Color x:Key="Retro.LinkColor">#1F6BB8</Color>
+  <Color x:Key="Retro.LinkVisitedColor">#6B3F8A</Color>
+  <Color x:Key="Retro.LinkHoverColor">#C8281E</Color>
+  <!-- Status -->
+  <Color x:Key="Retro.StatusErrorColor">#C8281E</Color>
+  <Color x:Key="Retro.StatusErrorBackgroundColor">#FBE5E2</Color>
+  <Color x:Key="Retro.StatusErrorBorderColor">#8C1A13</Color>
+  <Color x:Key="Retro.StatusWarningColor">#E8A100</Color>
+  <Color x:Key="Retro.StatusWarningBackgroundColor">#FFF4D6</Color>
+  <Color x:Key="Retro.StatusWarningTextColor">#8A5E00</Color>
+  <Color x:Key="Retro.StatusInfoColor">#1F6BB8</Color>
+  <Color x:Key="Retro.StatusInfoBackgroundColor">#E0EDF8</Color>
+  <Color x:Key="Retro.StatusSuccessColor">#2E8B3E</Color>
+  <Color x:Key="Retro.StatusSuccessBackgroundColor">#E2F1E5</Color>
+  <!-- Inputs / tooltips -->
+  <Color x:Key="Retro.InputFocusBackgroundColor">#FFFFE1</Color>
+  <Color x:Key="Retro.InputErrorBackgroundColor">#FFEAE7</Color>
+  <Color x:Key="Retro.TooltipBackgroundColor">#FFFFE1</Color>
+
+  <!-- ===== Brushes ====================================================== -->
+  <SolidColorBrush x:Key="Retro.Surface" Color="{StaticResource Retro.SurfaceColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.Surface2" Color="{StaticResource Retro.Surface2Color}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.Surface3" Color="{StaticResource Retro.Surface3Color}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.SurfaceInset" Color="{StaticResource Retro.SurfaceInsetColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.SurfaceToolbar" Color="{StaticResource Retro.SurfaceToolbarColor}" po:Freeze="True"/>
+
+  <SolidColorBrush x:Key="Retro.HeaderBlue1" Color="{StaticResource Retro.HeaderBlue1Color}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.HeaderBlue2" Color="{StaticResource Retro.HeaderBlue2Color}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.HeaderBlue3" Color="{StaticResource Retro.HeaderBlue3Color}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.HeaderGloss" Color="{StaticResource Retro.HeaderGlossColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.TitleBarBorder" Color="{StaticResource Retro.TitleBarBorderColor}" po:Freeze="True"/>
+
+  <SolidColorBrush x:Key="Retro.Accent" Color="{StaticResource Retro.AccentColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.Accent2" Color="{StaticResource Retro.Accent2Color}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.AccentSoft" Color="{StaticResource Retro.AccentSoftColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.AccentPale" Color="{StaticResource Retro.AccentPaleColor}" po:Freeze="True"/>
+
+  <SolidColorBrush x:Key="Retro.BorderLight" Color="{StaticResource Retro.BorderLightColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.BorderMid" Color="{StaticResource Retro.BorderMidColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.BorderDark" Color="{StaticResource Retro.BorderDarkColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.BorderDarker" Color="{StaticResource Retro.BorderDarkerColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.BorderBlack" Color="{StaticResource Retro.BorderBlackColor}" po:Freeze="True"/>
+
+  <SolidColorBrush x:Key="Retro.Foreground" Color="{StaticResource Retro.ForegroundColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.ForegroundMuted" Color="{StaticResource Retro.ForegroundMutedColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.ForegroundDisabled" Color="{StaticResource Retro.ForegroundDisabledColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.ForegroundOnAccent" Color="{StaticResource Retro.ForegroundOnAccentColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.ForegroundOnHeader" Color="{StaticResource Retro.ForegroundOnHeaderColor}" po:Freeze="True"/>
+
+  <SolidColorBrush x:Key="Retro.Link" Color="{StaticResource Retro.LinkColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.LinkVisited" Color="{StaticResource Retro.LinkVisitedColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.LinkHover" Color="{StaticResource Retro.LinkHoverColor}" po:Freeze="True"/>
+
+  <SolidColorBrush x:Key="Retro.StatusError" Color="{StaticResource Retro.StatusErrorColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusErrorBackground" Color="{StaticResource Retro.StatusErrorBackgroundColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusErrorBorder" Color="{StaticResource Retro.StatusErrorBorderColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusWarning" Color="{StaticResource Retro.StatusWarningColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusWarningBackground" Color="{StaticResource Retro.StatusWarningBackgroundColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusWarningText" Color="{StaticResource Retro.StatusWarningTextColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusInfo" Color="{StaticResource Retro.StatusInfoColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusInfoBackground" Color="{StaticResource Retro.StatusInfoBackgroundColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusSuccess" Color="{StaticResource Retro.StatusSuccessColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.StatusSuccessBackground" Color="{StaticResource Retro.StatusSuccessBackgroundColor}" po:Freeze="True"/>
+
+  <SolidColorBrush x:Key="Retro.InputFocusBackground" Color="{StaticResource Retro.InputFocusBackgroundColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.InputErrorBackground" Color="{StaticResource Retro.InputErrorBackgroundColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.TooltipBackground" Color="{StaticResource Retro.TooltipBackgroundColor}" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.DropShadow" Color="#40000000" po:Freeze="True"/>
+  <SolidColorBrush x:Key="Retro.TextShadow" Color="#66000000" po:Freeze="True"/>
+
+  <!-- ===== Gradients ===================================================== -->
+  <LinearGradientBrush x:Key="Retro.Gradient.TitleBar" StartPoint="0,0" EndPoint="0,1" po:Freeze="True">
+    <GradientStop Offset="0" Color="{StaticResource Retro.HeaderBlue1Color}"/>
+    <GradientStop Offset="0.35" Color="{StaticResource Retro.HeaderBlue2Color}"/>
+    <GradientStop Offset="0.5" Color="{StaticResource Retro.HeaderGlossColor}"/>
+    <GradientStop Offset="0.65" Color="{StaticResource Retro.HeaderBlue2Color}"/>
+    <GradientStop Offset="1" Color="{StaticResource Retro.HeaderBlue1Color}"/>
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="Retro.Gradient.Toolbar" StartPoint="0,0" EndPoint="0,1" po:Freeze="True">
+    <GradientStop Offset="0" Color="{StaticResource Retro.Surface3Color}"/>
+    <GradientStop Offset="1" Color="{StaticResource Retro.SurfaceToolbarColor}"/>
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="Retro.Gradient.Button" StartPoint="0,0" EndPoint="0,1" po:Freeze="True">
+    <GradientStop Offset="0" Color="#FFFFFF"/>
+    <GradientStop Offset="1" Color="#E2EAF3"/>
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="Retro.Gradient.ButtonHover" StartPoint="0,0" EndPoint="0,1" po:Freeze="True">
+    <GradientStop Offset="0" Color="#FFF6D9"/>
+    <GradientStop Offset="1" Color="#FFD984"/>
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="Retro.Gradient.ButtonPressed" StartPoint="0,0" EndPoint="0,1" po:Freeze="True">
+    <GradientStop Offset="0" Color="#DDC575"/>
+    <GradientStop Offset="1" Color="#FFE8A8"/>
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="Retro.Gradient.Banner" StartPoint="0,0" EndPoint="0,1" po:Freeze="True">
+    <GradientStop Offset="0" Color="#FFF6D9"/>
+    <GradientStop Offset="1" Color="#FFE8A8"/>
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="Retro.Gradient.Avatar" StartPoint="0,0" EndPoint="0,1" po:Freeze="True">
+    <GradientStop Offset="0" Color="{StaticResource Retro.HeaderBlue2Color}"/>
+    <GradientStop Offset="1" Color="{StaticResource Retro.HeaderBlue1Color}"/>
+  </LinearGradientBrush>
+  <!-- Progress bar barber stripes: 6px header-blue-2, 4px header-blue-3 -->
+  <LinearGradientBrush x:Key="Retro.Brush.ProgressStripes" MappingMode="Absolute" SpreadMethod="Repeat"
+                       StartPoint="0,0" EndPoint="10,0" po:Freeze="True">
+    <GradientStop Offset="0" Color="{StaticResource Retro.HeaderBlue2Color}"/>
+    <GradientStop Offset="0.6" Color="{StaticResource Retro.HeaderBlue2Color}"/>
+    <GradientStop Offset="0.6" Color="{StaticResource Retro.HeaderBlue3Color}"/>
+    <GradientStop Offset="1" Color="{StaticResource Retro.HeaderBlue3Color}"/>
+  </LinearGradientBrush>
+  <!-- Classic dithered scrollbar track -->
+  <DrawingBrush x:Key="Retro.Brush.ScrollTrack" TileMode="Tile" Viewport="0,0,2,2" ViewportUnits="Absolute"
+                Viewbox="0,0,2,2" ViewboxUnits="Absolute" Stretch="None" po:Freeze="True">
+    <DrawingBrush.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing Brush="{StaticResource Retro.Surface3}" Geometry="M0,0 H2 V2 H0 Z"/>
+        <GeometryDrawing Brush="{StaticResource Retro.Surface}" Geometry="M1,0 H2 V1 H1 Z M0,1 H1 V2 H0 Z"/>
+      </DrawingGroup>
+    </DrawingBrush.Drawing>
+  </DrawingBrush>
+
+  <!-- ===== Typography =================================================== -->
+  <FontFamily x:Key="Retro.FontFamily">Microsoft Sans Serif, MS Sans Serif, Tahoma, Segoe UI</FontFamily>
+  <FontFamily x:Key="Retro.FontFamily.Bold">Microsoft Sans Serif, Tahoma, Verdana, Segoe UI</FontFamily>
+  <FontFamily x:Key="Retro.FontFamily.Mono">Lucida Console, Courier New, Consolas</FontFamily>
+
+  <sys:Double x:Key="Retro.FontSize.XS">10</sys:Double>
+  <sys:Double x:Key="Retro.FontSize.SM">11</sys:Double>
+  <sys:Double x:Key="Retro.FontSize.MD">12</sys:Double>
+  <sys:Double x:Key="Retro.FontSize.LG">13</sys:Double>
+  <sys:Double x:Key="Retro.FontSize.XL">14</sys:Double>
+  <sys:Double x:Key="Retro.FontSize.2XL">16</sys:Double>
+  <sys:Double x:Key="Retro.FontSize.3XL">20</sys:Double>
+
+  <!-- ===== Spacing (4px grid with sub-grid) ============================ -->
+  <sys:Double x:Key="Retro.Space1">2</sys:Double>
+  <sys:Double x:Key="Retro.Space2">4</sys:Double>
+  <sys:Double x:Key="Retro.Space3">6</sys:Double>
+  <sys:Double x:Key="Retro.Space4">8</sys:Double>
+  <sys:Double x:Key="Retro.Space5">12</sys:Double>
+  <sys:Double x:Key="Retro.Space6">16</sys:Double>
+  <sys:Double x:Key="Retro.Space7">20</sys:Double>
+  <sys:Double x:Key="Retro.Space8">24</sys:Double>
+
+</ResourceDictionary>

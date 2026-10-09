@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Inputs" subtitle="Normal, focused, disabled, error, select" viewport="700x160" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:16px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .grid { display: grid; grid-template-columns: 80px 1fr 80px 1fr; gap: 6px 10px; align-items: center; max-width: 600px; }
+  label { text-align: right; }
+  .lbl-state { font-size: 10px; color: var(--fg-muted); margin-left: 6px; }
+</style></head>
+<body>
+  <div class="grid">
+    <label>Normal</label><input class="sap-input" value="" style="width:100%">
+    <label>Focused</label><input class="sap-input" value="text" style="width:100%; background:#FFFFE1">
+    <label>Disabled</label><input class="sap-input is-disabled" value="" disabled style="width:100%">
+    <label>Error</label><input class="sap-input is-error" value="6E22" style="width:100%">
+    <label>Number</label><input class="sap-input" value="3,250" style="width:80px; text-align:right">
+    <label>Select</label>
+      <span class="sap-select" style="width:100%"><input class="sap-input" value="Carrier — DHL" style="width:100%"><span class="arrow">▼</span></span>
+  </div>
+</body></html>

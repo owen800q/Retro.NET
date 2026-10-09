@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Table" subtitle="Header bevel, row hover, amber selection" viewport="700x180" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:12px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  table.sap-table td:first-child input[type=checkbox] { margin: 0; }
+</style></head>
+<body>
+  <table class="sap-table">
+    <thead><tr><th style="width:18px"></th><th>Doc</th><th>Carrier</th><th>Status</th><th style="text-align:right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td><input type="checkbox"></td><td>6000068250</td><td>DHL Freight</td><td><span class="sap-tag">Open</span></td><td style="text-align:right; font-variant-numeric: tabular-nums">14,553.21</td></tr>
+      <tr class="is-hovered"><td><input type="checkbox"></td><td>6000068251</td><td>UPS Ground</td><td><span class="sap-tag warning">Hold</span></td><td style="text-align:right; font-variant-numeric: tabular-nums">2,841.00</td></tr>
+      <tr class="is-selected"><td><input type="checkbox" checked></td><td>6000068252</td><td>FedEx Express</td><td><span class="sap-tag error">Error</span></td><td style="text-align:right; font-variant-numeric: tabular-nums">9,120.45</td></tr>
+      <tr><td><input type="checkbox"></td><td>6000068253</td><td>Schenker</td><td><span class="sap-tag">Open</span></td><td style="text-align:right; font-variant-numeric: tabular-nums">655.10</td></tr>
+      <tr><td><input type="checkbox"></td><td>6000068254</td><td>Kuehne+Nagel</td><td><span class="sap-tag">Open</span></td><td style="text-align:right; font-variant-numeric: tabular-nums">23,990.00</td></tr>
+    </tbody>
+  </table>
+</body></html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Avatar / Badge / Link" subtitle="Mini chrome bits" viewport="700x130" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:16px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .lbl { font-size: 10px; color: var(--fg-muted); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="col"><span class="sap-avatar" style="background: linear-gradient(180deg,#2A6FB8,#003D7A); color:#fff">JM</span><div class="lbl">avatar — initials</div></div>
+    <div class="col"><span class="sap-avatar" style="background: var(--accent); color:#000">SK</span><div class="lbl">accent</div></div>
+    <div class="col">
+      <span class="sap-badge"><svg width="22" height="22"><use href="../assets/icons.svg#mail"/></svg><span class="count">3</span></span>
+      <div class="lbl">badge — 3</div>
+    </div>
+    <div class="col">
+      <span class="sap-badge"><svg width="22" height="22"><use href="../assets/icons.svg#user"/></svg><span class="count">99+</span></span>
+      <div class="lbl">badge — overflow</div>
+    </div>
+    <div class="col">
+      <a class="sap-link">Normal</a>
+      <a class="sap-link visited">Visited</a>
+      <a class="sap-link" style="color:var(--link-hover)">Hover</a>
+      <div class="lbl">link states</div>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Type" name="Type — Scale" subtitle="10 → 20px, body to page title" viewport="700x140" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:16px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .row { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+  .item { display: flex; flex-direction: column; gap: 4px; }
+  .name { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="item"><div style="font-family:var(--font-system); font-size:10px">8pt body — handles forms, tables, status bar</div><div class="name">--type-xs · 10px</div></div>
+    <div class="item"><div style="font-family:var(--font-system); font-size:11px">Normal body text — MS Sans Serif</div><div class="name">--type-sm · 11px</div></div>
+    <div class="item"><div style="font-family:var(--font-system); font-size:12px">Default UI text</div><div class="name">--type-md · 12px</div></div>
+    <div class="item"><div style="font-family:var(--font-bold); font-weight:700; font-size:13px">Emphasis label</div><div class="name">--type-lg · 13px bold</div></div>
+    <div class="item"><div style="font-family:var(--font-bold); font-weight:700; font-size:14px">Section title</div><div class="name">--type-xl · 14px bold</div></div>
+    <div class="item"><div style="font-family:var(--font-bold); font-weight:700; font-size:16px; color:var(--header-blue-1)">Page Title</div><div class="name">--type-2xl · 16px</div></div>
+    <div class="item"><div style="font-family:var(--font-bold); font-weight:700; font-size:20px; color:var(--header-blue-1); letter-spacing:.02em">DESIGN SYSTEM</div><div class="name">--type-3xl · 20px</div></div>
+  </div>
+</body></html>

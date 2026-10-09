@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>SAP Icons</title>
+<style>
+  body { font-family: "MS Sans Serif", Tahoma, sans-serif; font-size: 11px; padding: 16px; background: #D6E4F1; }
+  h1 { font-size: 14px; margin: 0 0 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, 80px); gap: 8px; }
+  .cell { background: #EAF1F8; padding: 6px; text-align: center; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #6E7A89; }
+  .cell svg { width: 32px; height: 32px; image-rendering: pixelated; }
+  .name { margin-top: 4px; font-size: 10px; color: #4A5566; }
+  code { font-family: "Lucida Console", monospace; font-size: 10px; background: #fff; padding: 1px 3px; }
+</style>
+</head><body>
+<h1>SAP-style 16×16 Icon Sprite</h1>
+<p>Use as <code>&lt;svg&gt;&lt;use href="icons.svg#NAME"/&gt;&lt;/svg&gt;</code> &mdash; one symbol per icon, displayed at 2× here for clarity.</p>
+<div class="grid" id="grid"></div>
+<script>
+const names = ["new","open","save","saveas","print","cut","copy","paste","undo","redo","delete","edit","find","refresh","execute","back","forward","up","home","help","settings","gear","table","chart","filter","sort","export","import","mail","user","lock","check","x","warning","info","error","success","plus","minus","calendar","clock","folder","document","attach"];
+const grid = document.getElementById("grid");
+names.forEach(n => {
+  const cell = document.createElement("div"); cell.className = "cell";
+  cell.innerHTML = `<svg viewBox="0 0 16 16"><use href="icons.svg#${n}"/></svg><div class="name">${n}</div>`;
+  grid.appendChild(cell);
+});
+</script>
+</body></html>

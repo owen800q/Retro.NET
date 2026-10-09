@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Brand — Iconography" subtitle="16×16 pixel-style icon sprite" viewport="700x260" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:14px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; }
+  .cell { display:flex; flex-direction:column; align-items:center; gap:3px; padding: 4px; background: var(--surface-2); box-shadow: var(--bevel-out); }
+  .cell svg { width: 20px; height: 20px; }
+  .nm { font-size: 9px; color: var(--fg-muted); font-family: var(--font-mono); }
+</style></head>
+<body>
+  <div class="grid" id="g"></div>
+  <script>
+    const names = ["new","open","save","print","cut","copy","paste","undo","redo","delete","edit","find","refresh","execute","back","forward","up","home","help","settings","table","chart","filter","sort","export","import","mail","user","lock","check","x","warning","info","error","success","plus","minus","calendar","clock","folder","document","attach"];
+    const g = document.getElementById('g');
+    names.forEach(n => g.insertAdjacentHTML('beforeend', `<div class="cell"><svg><use href="../assets/icons.svg#${n}"/></svg><span class="nm">${n}</span></div>`));
+  </script>
+</body></html>

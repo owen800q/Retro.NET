@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Window chrome" subtitle="Title bar, menu, toolbar, status" viewport="700x120" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:0; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .demo { box-shadow: var(--bevel-out-strong); margin: 8px; }
+  .menubar > span > u { text-decoration: underline; }
+</style></head>
+<body>
+  <div class="demo">
+    <div class="sap-titlebar"><svg width="14" height="14"><use href="../assets/icons.svg#document"/></svg><span>Shipment: Display 0000080014 — SAP</span><span class="grow"></span><span class="sap-titlebar-btn">_</span><span class="sap-titlebar-btn">▢</span><span class="sap-titlebar-btn">×</span></div>
+    <div class="sap-menubar">
+      <span><u>S</u>hipment</span>
+      <span><u>E</u>dit</span>
+      <span><u>G</u>oto</span>
+      <span>S<u>y</u>stem</span>
+      <span><u>H</u>elp</span>
+    </div>
+    <div class="sap-toolbar">
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#new"/></svg></button>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#open"/></svg></button>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#save"/></svg></button>
+      <span class="sep"></span>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#print"/></svg></button>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#find"/></svg></button>
+      <span class="sep"></span>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#back"/></svg></button>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#forward"/></svg></button>
+      <span class="sep"></span>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#execute"/></svg></button>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#refresh"/></svg></button>
+      <button class="sap-btn toolbar"><svg width="16" height="16"><use href="../assets/icons.svg#delete"/></svg></button>
+    </div>
+    <div class="sap-statusbar"><span>Ready</span><span style="margin-left:auto; font-family: var(--font-mono)">Statistic 14:55:1293</span></div>
+  </div>
+</body></html>

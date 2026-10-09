@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Spacing" name="Spacing — Bevel system" subtitle="Raised / sunken / flat / fieldset" viewport="700x220" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:16px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .box { width: 110px; height: 60px; background: var(--surface-2); display:flex; align-items:center; justify-content:center; font-family: var(--font-bold); font-weight:700; font-size:11px; color: var(--fg-muted); }
+  .lbl { font-family: var(--font-mono); font-size: 10px; color: var(--fg); }
+  .out      { box-shadow: var(--bevel-out); }
+  .out-s    { box-shadow: var(--bevel-out-strong); }
+  .in       { box-shadow: var(--bevel-in); }
+  .in-s     { box-shadow: var(--bevel-in-strong); }
+  .flat     { box-shadow: var(--bevel-flat); }
+  .field    { box-shadow: var(--bevel-fieldset); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box out">RAISED</div><div class="lbl">--bevel-out</div></div>
+    <div class="item"><div class="box out-s">RAISED+</div><div class="lbl">--bevel-out-strong</div></div>
+    <div class="item"><div class="box in">SUNKEN</div><div class="lbl">--bevel-in</div></div>
+    <div class="item"><div class="box in-s">SUNKEN+</div><div class="lbl">--bevel-in-strong</div></div>
+  </div>
+  <div class="row" style="margin-top: 14px">
+    <div class="item"><div class="box flat">FLAT</div><div class="lbl">--bevel-flat</div></div>
+    <div class="item"><div class="box field">FIELDSET</div><div class="lbl">--bevel-fieldset</div></div>
+  </div>
+</body></html>

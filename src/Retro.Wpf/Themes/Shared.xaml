@@ -1,0 +1,113 @@
+<!-- Shared building blocks used by several control dictionaries. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+                    xmlns:retro="clr-namespace:Retro.Wpf">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Tokens.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <retro:NullSkipConverter x:Key="Retro.NullSkip"/>
+  <retro:NotEmptyToVisibilityConverter x:Key="Retro.NotEmptyToVisibility"/>
+  <BooleanToVisibilityConverter x:Key="Retro.BoolToVisibility"/>
+
+  <!-- Classic Windows focus ring: dotted 1px black, inset from the control edge. -->
+  <Style x:Key="Retro.FocusVisual">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Rectangle Margin="4" Stroke="#000000" StrokeThickness="1" StrokeDashArray="1 1" SnapsToDevicePixels="True"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="Retro.FocusVisual.Content">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Rectangle Margin="19,-1,-2,-1" Stroke="#000000" StrokeThickness="1" StrokeDashArray="1 1" SnapsToDevicePixels="True"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="Retro.FocusVisual.Tight">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Rectangle Margin="1" Stroke="#000000" StrokeThickness="1" StrokeDashArray="1 1" SnapsToDevicePixels="True"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Pixel-exact glyphs (draw with Stretch="None"). -->
+  <Geometry x:Key="Retro.Glyph.ArrowDown" po:Freeze="True">M0,0h7v1h-7z M1,1h5v1h-5z M2,2h3v1h-3z M3,3h1v1h-1z</Geometry>
+  <Geometry x:Key="Retro.Glyph.ArrowUp" po:Freeze="True">M3,0h1v1h-1z M2,1h3v1h-3z M1,2h5v1h-5z M0,3h7v1h-7z</Geometry>
+  <Geometry x:Key="Retro.Glyph.ArrowLeft" po:Freeze="True">M3,0h1v7h-1z M2,1h1v5h-1z M1,2h1v3h-1z M0,3h1v1h-1z</Geometry>
+  <Geometry x:Key="Retro.Glyph.ArrowRight" po:Freeze="True">M0,0h1v7h-1z M1,1h1v5h-1z M2,2h1v3h-1z M3,3h1v1h-1z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Check" po:Freeze="True">M6,0h1v1h-1z M5,1h2v1h-2z M0,2h1v1h-1z M4,2h3v1h-3z M0,3h2v1h-2z M3,3h3v1h-3z M0,4h5v1h-5z M1,5h3v1h-3z M2,6h1v1h-1z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Close" po:Freeze="True">M0,0h2v1h-2z M6,0h2v1h-2z M1,1h2v1h-2z M5,1h2v1h-2z M2,2h4v1h-4z M3,3h2v1h-2z M2,4h4v1h-4z M1,5h2v1h-2z M5,5h2v1h-2z M0,6h2v1h-2z M6,6h2v1h-2z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Minimize" po:Freeze="True">M1,5h6v2h-6z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Maximize" po:Freeze="True">M0,0h9v8h-9z M1,2v5h7v-5z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Restore" po:Freeze="True">M2,0h7v2h-7z M8,2h1v4h-1z M7,5h1v1h-1z M0,3h7v2h-7z M0,5h1v4h-1z M6,5h1v4h-1z M0,8h7v1h-7z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Plus" po:Freeze="True">M0,2h5v1h-5z M2,0h1v5h-1z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Minus" po:Freeze="True">M0,2h5v1h-5z</Geometry>
+  <Geometry x:Key="Retro.Glyph.Grip" po:Freeze="True">M0,0h1v1h-1z M2,0h1v1h-1z M0,2h1v1h-1z M2,2h1v1h-1z M0,4h1v1h-1z M2,4h1v1h-1z</Geometry>
+
+  <!-- Bare, borderless button used inside other templates. -->
+  <Style x:Key="Retro.BareButton" TargetType="ButtonBase">
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ButtonBase">
+          <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- The bold "×" used by closable tags and message strips. -->
+  <Style x:Key="Retro.CloseX" TargetType="Button" BasedOn="{StaticResource Retro.BareButton}">
+    <Setter Property="Content" Value="×"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="Cursor" Value="Arrow"/>
+    <Setter Property="Padding" Value="2,0,0,0"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+
+  <!-- A Button rendered as an underlined link. -->
+  <Style x:Key="Retro.LinkButton" TargetType="ButtonBase">
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Link}"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="FocusVisualStyle" Value="{StaticResource Retro.FocusVisual.Tight}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ButtonBase">
+          <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+            <ContentPresenter RecognizesAccessKey="True" VerticalAlignment="Center">
+              <ContentPresenter.Resources>
+                <Style TargetType="TextBlock">
+                  <Setter Property="TextDecorations" Value="Underline"/>
+                </Style>
+              </ContentPresenter.Resources>
+            </ContentPresenter>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Foreground" Value="{DynamicResource Retro.LinkHover}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

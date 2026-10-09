@@ -1,0 +1,427 @@
+<UserControl x:Class="Retro.Wpf.Demo.GalleryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:retro="https://github.com/owen800q/Retro.NET"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             FontFamily="{DynamicResource Retro.FontFamily}" FontSize="{DynamicResource Retro.FontSize.SM}"
+             Foreground="{DynamicResource Retro.Foreground}" Background="{DynamicResource Retro.Surface}"
+             TextOptions.TextFormattingMode="Display" UseLayoutRounding="True" SnapsToDevicePixels="True">
+  <UserControl.Resources>
+    <Style x:Key="Caption" TargetType="TextBlock" BasedOn="{StaticResource Retro.Text.Help}">
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="Margin" Value="0,4,0,0"/>
+    </Style>
+    <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+      <Setter Property="Margin" Value="0,0,0,12"/>
+    </Style>
+    <Style x:Key="Swatch" TargetType="Border">
+      <Setter Property="Width" Value="64"/>
+      <Setter Property="Height" Value="28"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource Retro.BorderDark}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+  </UserControl.Resources>
+
+  <StackPanel Margin="12">
+    <!-- Brand -->
+    <retro:Bevel Kind="RaisedStrong" Background="{DynamicResource Retro.Surface}" HorizontalAlignment="Left" Padding="12,10" Margin="0,0,0,14">
+      <StackPanel Orientation="Horizontal">
+        <Border Background="{DynamicResource Retro.Gradient.Avatar}" BorderBrush="{DynamicResource Retro.TitleBarBorder}" BorderThickness="1" Padding="10,3">
+          <TextBlock Text="RETRO" Foreground="White" FontFamily="Tahoma" FontWeight="Bold" FontSize="20"/>
+        </Border>
+        <StackPanel Margin="8,0,0,0" VerticalAlignment="Center">
+          <TextBlock Text="RETRO.NET GUI" FontFamily="Tahoma" FontWeight="Bold" FontSize="14" Foreground="{DynamicResource Retro.HeaderBlue1}"/>
+          <TextBlock Text="DESIGN SYSTEM v1.0 FOR WPF" FontFamily="Tahoma" FontSize="9" Foreground="{DynamicResource Retro.ForegroundMuted}"/>
+        </StackPanel>
+      </StackPanel>
+    </retro:Bevel>
+
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="12"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- ===== Left column ===== -->
+      <StackPanel>
+        <GroupBox Header="Buttons">
+          <StackPanel>
+            <WrapPanel>
+              <Button Content="Execute" Margin="0,0,8,6"/>
+              <ToggleButton Content="Active" IsChecked="True" Margin="0,0,8,6"/>
+              <Button Content="Disabled" IsEnabled="False" Margin="0,0,8,6"/>
+              <Button retro:Assist.Icon="Print" Style="{StaticResource Retro.IconButton}" ToolTip="Print" Margin="0,0,8,6"/>
+            </WrapPanel>
+            <WrapPanel>
+              <Button retro:Assist.Icon="Document" Content="Shipment" Margin="0,0,6,0"/>
+              <Button retro:Assist.Icon="Export" Content="Track Shipment" Margin="0,0,6,0"/>
+              <Button retro:Assist.Icon="Table" Content="Table Settings"/>
+            </WrapPanel>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Inputs">
+          <StackPanel>
+            <retro:FormField Label="Normal"><TextBox Width="200"/></retro:FormField>
+            <retro:FormField Label="Hint"><TextBox Width="200" retro:Assist.Placeholder="Enter carrier…"/></retro:FormField>
+            <retro:FormField Label="Disabled"><TextBox Width="200" IsEnabled="False"/></retro:FormField>
+            <retro:FormField Label="Error"><TextBox Width="200" Text="6E22" retro:Assist.IsError="True"/></retro:FormField>
+            <retro:FormField Label="Number"><TextBox Width="80" Text="3,250" TextAlignment="Right"/></retro:FormField>
+            <retro:FormField Label="Password"><PasswordBox Width="200" Password="secret"/></retro:FormField>
+            <retro:FormField Label="Select">
+              <ComboBox Width="200" SelectedIndex="0">
+                <ComboBoxItem Content="Carrier — DHL"/>
+                <ComboBoxItem Content="Carrier — UPS"/>
+                <ComboBoxItem Content="Carrier — FedEx"/>
+              </ComboBox>
+            </retro:FormField>
+            <retro:FormField Label="Editable"><ComboBox Width="200" IsEditable="True" Text="Free text"/></retro:FormField>
+            <retro:FormField Label="Date"><DatePicker Width="200" SelectedDate="2026-03-17"/></retro:FormField>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Checkbox &amp; Radio">
+          <UniformGrid Columns="2">
+            <StackPanel>
+              <CheckBox Content="Normal" Margin="0,0,0,6"/>
+              <CheckBox Content="Checked" IsChecked="True" Margin="0,0,0,6"/>
+              <CheckBox Content="Indeterminate" IsThreeState="True" IsChecked="{x:Null}" Margin="0,0,0,6"/>
+              <CheckBox Content="Disabled" IsEnabled="False"/>
+            </StackPanel>
+            <StackPanel>
+              <RadioButton Content="Normal" GroupName="g" Margin="0,0,0,6"/>
+              <RadioButton Content="Selected" GroupName="g" IsChecked="True" Margin="0,0,0,6"/>
+              <RadioButton Content="Disabled" GroupName="g2" IsEnabled="False" Margin="0,0,0,6"/>
+              <RadioButton Content="Disabled + selected" GroupName="g3" IsEnabled="False" IsChecked="True"/>
+            </StackPanel>
+          </UniformGrid>
+        </GroupBox>
+
+        <GroupBox Header="Switch, Progress, Slider">
+          <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+              <retro:ToggleSwitch IsChecked="True" Content="On" Margin="0,0,16,0"/>
+              <retro:ToggleSwitch Content="Off" Margin="0,0,16,0"/>
+              <retro:ToggleSwitch Content="Disabled" IsEnabled="False"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <StackPanel Margin="0,0,16,0">
+                <ProgressBar Width="200" Value="60"/>
+                <TextBlock Style="{StaticResource Caption}" Text="Progress 60%"/>
+              </StackPanel>
+              <StackPanel Margin="0,0,16,0">
+                <ProgressBar Width="120" IsIndeterminate="True"/>
+                <TextBlock Style="{StaticResource Caption}" Text="Loading…"/>
+              </StackPanel>
+              <StackPanel>
+                <Slider Width="160" Maximum="100" Value="60"/>
+                <TextBlock Style="{StaticResource Caption}" Text="Slider"/>
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Tabs &amp; Tags">
+          <StackPanel>
+            <TabControl Height="70" Margin="0,0,0,10">
+              <TabItem Header="Active"><TextBlock Text="Tab page content."/></TabItem>
+              <TabItem Header="Inactive"/>
+              <TabItem Header="Other"/>
+              <TabItem Header="Disabled" IsEnabled="False"/>
+            </TabControl>
+            <WrapPanel>
+              <retro:Tag Content="Info" Margin="0,0,6,4"/>
+              <retro:Tag Tone="Warning" Content="Warning" Margin="0,0,6,4"/>
+              <retro:Tag Tone="Error" Content="Error" Margin="0,0,6,4"/>
+              <retro:Tag Tone="Success" Content="Success" Margin="0,0,6,4"/>
+              <retro:Tag Content="Normal" IsClosable="True" Margin="0,0,6,4"/>
+              <retro:Tag Tone="Warning" Content="Warning" IsClosable="True" Margin="0,0,6,4"/>
+              <retro:Tag Tone="Error" Content="Error" IsClosable="True" Margin="0,0,6,4"/>
+            </WrapPanel>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Table">
+          <DataGrid x:Name="SampleGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" Height="140">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Doc" Binding="{Binding Doc}" Width="90"/>
+              <DataGridTextColumn Header="Carrier" Binding="{Binding Carrier}" Width="*"/>
+              <DataGridTemplateColumn Header="Status" Width="70">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate>
+                    <retro:Tag Tone="{Binding Tone}" Content="{Binding Status}"/>
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+              <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="80">
+                <DataGridTextColumn.ElementStyle>
+                  <Style TargetType="TextBlock"><Setter Property="HorizontalAlignment" Value="Right"/></Style>
+                </DataGridTextColumn.ElementStyle>
+              </DataGridTextColumn>
+            </DataGrid.Columns>
+          </DataGrid>
+        </GroupBox>
+
+        <GroupBox Header="Lists, Tree, Collapse">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="8"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TreeView Height="120">
+              <TreeViewItem Header="Logistics" IsExpanded="True">
+                <TreeViewItem Header="Shipment" IsExpanded="True">
+                  <TreeViewItem Header="VL01N — Create"/>
+                  <TreeViewItem Header="VL02N — Change" IsSelected="True"/>
+                  <TreeViewItem Header="VL03N — Display"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Tracking">
+                  <TreeViewItem Header="Track Shipment"/>
+                </TreeViewItem>
+              </TreeViewItem>
+            </TreeView>
+            <StackPanel Grid.Column="2">
+              <ListBox Height="64" SelectedIndex="1" Margin="0,0,0,6">
+                <ListBoxItem Content="Basic list"/>
+                <ListBoxItem Content="Selected item"/>
+                <ListBoxItem Content="Disabled" IsEnabled="False"/>
+                <ListBoxItem Content="Item"/>
+              </ListBox>
+              <Expander Header="Sections" IsExpanded="True">
+                <TextBlock Text="Collapsible content." />
+              </Expander>
+            </StackPanel>
+          </Grid>
+        </GroupBox>
+      </StackPanel>
+
+      <!-- ===== Right column ===== -->
+      <StackPanel Grid.Column="2">
+        <GroupBox Header="Window Chrome &amp; Menus">
+          <StackPanel>
+            <retro:Bevel Kind="RaisedStrong" Background="{DynamicResource Retro.Surface}">
+              <StackPanel>
+                <Border Background="{DynamicResource Retro.Gradient.TitleBar}" BorderBrush="{DynamicResource Retro.TitleBarBorder}"
+                        BorderThickness="0,0,0,1" Padding="6,3">
+                  <StackPanel Orientation="Horizontal">
+                    <retro:RetroIcon Kind="Document" Size="14" Margin="0,0,6,0"/>
+                    <TextBlock Text="Shipment: Display 0000080014" Foreground="White" FontWeight="Bold" FontSize="12"/>
+                  </StackPanel>
+                </Border>
+                <Menu>
+                  <MenuItem Header="_Shipment"/>
+                  <MenuItem Header="_Edit"/>
+                  <MenuItem Header="_Goto"/>
+                  <MenuItem Header="S_ystem"/>
+                  <MenuItem Header="_Help"/>
+                </Menu>
+                <ToolBar>
+                  <Button retro:Assist.Icon="New"/>
+                  <Button retro:Assist.Icon="Open"/>
+                  <Button retro:Assist.Icon="Save"/>
+                  <Separator/>
+                  <Button retro:Assist.Icon="Print"/>
+                  <Button retro:Assist.Icon="Find"/>
+                  <Separator/>
+                  <Button retro:Assist.Icon="Execute"/>
+                  <Button retro:Assist.Icon="Refresh"/>
+                  <Button retro:Assist.Icon="Delete"/>
+                </ToolBar>
+                <StatusBar>
+                  <StatusBarItem DockPanel.Dock="Right" Margin="0">
+                    <TextBlock Style="{StaticResource Retro.Text.Mono}" FontSize="10" Text="Statistic 14:55:1293"/>
+                  </StatusBarItem>
+                  <StatusBarItem Content="Ready"/>
+                </StatusBar>
+              </StackPanel>
+            </retro:Bevel>
+            <Grid Margin="0,10,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <retro:Bevel Style="{StaticResource Retro.MenuPanel}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="200">
+                <StackPanel Grid.IsSharedSizeScope="True">
+                  <MenuItem Header="New" InputGestureText="Ctrl+N" retro:Assist.Icon="New"/>
+                  <MenuItem Header="Open…" InputGestureText="Ctrl+O" retro:Assist.Icon="Open"/>
+                  <MenuItem Header="Save" InputGestureText="Ctrl+S" retro:Assist.Icon="Save"/>
+                  <MenuItem Header="Save As…" retro:Assist.Icon="SaveAs" IsEnabled="False"/>
+                  <Separator/>
+                  <MenuItem Header="Print…" InputGestureText="Ctrl+P" retro:Assist.Icon="Print"/>
+                  <Separator/>
+                  <MenuItem Header="Exit" InputGestureText="Alt+F4" retro:Assist.Icon="Close"/>
+                </StackPanel>
+              </retro:Bevel>
+              <StackPanel Grid.Column="2">
+                <Border Background="{DynamicResource Retro.TooltipBackground}" BorderBrush="Black" BorderThickness="1"
+                        Padding="5,2" HorizontalAlignment="Left" Margin="0,0,0,12">
+                  <TextBlock Text="Tooltip: Save (Ctrl+S)"/>
+                </Border>
+                <retro:Bevel Style="{StaticResource Retro.Popover}" Width="220" HorizontalAlignment="Left">
+                  <StackPanel>
+                    <TextBlock Style="{StaticResource Retro.Text.Bold}" Text="Popconfirm" Margin="0,0,0,4"/>
+                    <TextBlock Text="Post document 6000068250 now?" TextWrapping="Wrap"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                      <Button Content="OK" MinWidth="56"/>
+                      <Button Content="Cancel" MinWidth="56" Margin="4,0,0,0"/>
+                    </StackPanel>
+                  </StackPanel>
+                </retro:Bevel>
+              </StackPanel>
+            </Grid>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Dialogs &amp; Messages">
+          <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+              <Button retro:Assist.Icon="Warning" Content="Confirm Delete…" Click="OnConfirm"/>
+              <Button retro:Assist.Icon="Error" Content="Message Box…" Margin="6,0,0,0" Click="OnError"/>
+              <Button retro:Assist.Icon="Help" Content="Yes / No / Cancel…" Margin="6,0,0,0" Click="OnQuestion"/>
+            </StackPanel>
+            <retro:MessageStrip Severity="Info" Content="Document saved successfully." Margin="0,0,0,6"/>
+            <retro:MessageStrip Severity="Warning" Content="Verify totals before posting." Margin="0,0,0,6"/>
+            <retro:MessageStrip Severity="Error" Content="Field &quot;Carrier&quot; is required." Margin="0,0,0,6"/>
+            <retro:MessageStrip Severity="Success" Content="Posting complete — Document 6000068250 created."/>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Cards (Fieldset Form)">
+          <StackPanel>
+            <retro:FormField Label="Payment">
+              <ComboBox Width="200" SelectedIndex="0">
+                <ComboBoxItem Content="Visa •••• 4242"/>
+              </ComboBox>
+            </retro:FormField>
+            <retro:FormField Label="Error" IsRequired="True" ErrorText="Field is required.">
+              <TextBox Width="200"/>
+            </retro:FormField>
+            <retro:FormField Label="Help text" HelpText="Enter the customer's tax ID (10 digits).">
+              <TextBox Width="200"/>
+            </retro:FormField>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Breadcrumb, Pagination, Avatar, Badge, Links">
+          <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+              <retro:Breadcrumb VerticalAlignment="Center" Margin="0,0,24,0">
+                <retro:BreadcrumbItem Content="Home"/>
+                <retro:BreadcrumbItem Content="Shipment"/>
+                <retro:BreadcrumbItem Content="Create"/>
+              </retro:Breadcrumb>
+              <retro:Pagination PageCount="20" CurrentPage="2"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <retro:Avatar Initials="JM" Background="{DynamicResource Retro.Gradient.Avatar}" Foreground="White" Margin="0,0,10,0"/>
+              <retro:Avatar Initials="SK" Background="{DynamicResource Retro.Accent}" Margin="0,0,20,0"/>
+              <retro:Badge Count="3" Margin="0,0,20,0">
+                <retro:RetroIcon Kind="Mail" Size="22"/>
+              </retro:Badge>
+              <retro:Badge Count="120" Margin="0,0,24,0">
+                <retro:RetroIcon Kind="User" Size="22"/>
+              </retro:Badge>
+              <TextBlock VerticalAlignment="Center">
+                <Hyperlink>Normal</Hyperlink>
+                <Run Text="  "/>
+                <Hyperlink Style="{StaticResource Retro.Hyperlink.Visited}">Visited</Hyperlink>
+                <Run Text="  "/>
+                <Hyperlink Foreground="{DynamicResource Retro.LinkHover}">Hover</Hyperlink>
+              </TextBlock>
+            </StackPanel>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Calendar &amp; Timeline">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="14"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Calendar x:Name="SampleCalendar" VerticalAlignment="Top" IsTodayHighlighted="False"/>
+            <retro:Timeline Grid.Column="2">
+              <retro:TimelineItem Header="Document created" Content="2026-03-17 14:55 · J. Müller"/>
+              <retro:TimelineItem Header="Items added (3)" Content="2026-03-17 14:58 · J. Müller"/>
+              <retro:TimelineItem Header="Sent for approval" Content="2026-03-17 15:02 · System"/>
+            </retro:Timeline>
+          </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Empty">
+          <retro:EmptyState MinHeight="120" Description="Adjust the selection criteria and press Execute (F8)."/>
+        </GroupBox>
+      </StackPanel>
+    </Grid>
+
+    <!-- ===== Foundations ===== -->
+    <GroupBox Header="Bevels">
+      <WrapPanel>
+        <WrapPanel.Resources>
+          <Style TargetType="retro:Bevel">
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="0,0,14,0"/>
+            <Setter Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+          </Style>
+        </WrapPanel.Resources>
+        <retro:Bevel Kind="Raised"><TextBlock Text="RAISED" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource Retro.ForegroundMuted}"/></retro:Bevel>
+        <retro:Bevel Kind="RaisedStrong"><TextBlock Text="RAISED+" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource Retro.ForegroundMuted}"/></retro:Bevel>
+        <retro:Bevel Kind="Sunken"><TextBlock Text="SUNKEN" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource Retro.ForegroundMuted}"/></retro:Bevel>
+        <retro:Bevel Kind="SunkenStrong"><TextBlock Text="SUNKEN+" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource Retro.ForegroundMuted}"/></retro:Bevel>
+        <retro:Bevel Kind="Flat"><TextBlock Text="FLAT" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource Retro.ForegroundMuted}"/></retro:Bevel>
+        <retro:Bevel Kind="Fieldset"><TextBlock Text="FIELDSET" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource Retro.ForegroundMuted}"/></retro:Bevel>
+      </WrapPanel>
+    </GroupBox>
+
+    <GroupBox Header="Colors">
+      <ItemsControl x:Name="Swatches">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Margin="0,0,10,8" Width="74">
+              <Border Style="{StaticResource Swatch}" Background="{Binding Brush}"/>
+              <TextBlock Text="{Binding Name}" FontSize="10" Margin="0,2,0,0"/>
+              <TextBlock Text="{Binding Hex}" Style="{StaticResource Retro.Text.Mono}" FontSize="9" Foreground="{DynamicResource Retro.ForegroundMuted}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </GroupBox>
+
+    <GroupBox Header="Typography">
+      <StackPanel>
+        <TextBlock Style="{StaticResource Retro.Text.H1}" Text="Shipment Maintenance — 20px"/>
+        <TextBlock Style="{StaticResource Retro.Text.H2}" Text="General data — 16px"/>
+        <TextBlock Style="{StaticResource Retro.Text.H3}" Text="Section title — 14px"/>
+        <TextBlock Style="{StaticResource Retro.Text.Body}" Text="Body / fields — Microsoft Sans Serif 11px. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"/>
+        <TextBlock Style="{StaticResource Retro.Text.Bold}" Text="Bold label — Customer Number 3250"/>
+        <TextBlock Style="{StaticResource Retro.Text.Help}" Text="Help text — 10px, muted. Enter the customer's tax ID."/>
+        <TextBlock Style="{StaticResource Retro.Text.Mono}" Text="Mono — VL01N · MUC-PRD-01 · 14:55:1293"/>
+      </StackPanel>
+    </GroupBox>
+
+    <GroupBox Header="Icons">
+      <ItemsControl x:Name="Icons">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <retro:Bevel Kind="Raised" Background="{DynamicResource Retro.Surface2}" Width="74" Margin="0,0,6,6" Padding="4">
+              <StackPanel>
+                <retro:RetroIcon Kind="{Binding}" Size="32"/>
+                <TextBlock Text="{Binding}" FontSize="10" HorizontalAlignment="Center" Foreground="{DynamicResource Retro.ForegroundMuted}" Margin="0,3,0,0"/>
+              </StackPanel>
+            </retro:Bevel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </GroupBox>
+  </StackPanel>
+</UserControl>

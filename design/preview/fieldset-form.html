@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Fieldset & Form" subtitle="Legend panel with field rows" viewport="700x210" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:14px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .form { display: grid; grid-template-columns: 80px 1fr; gap: 4px 8px; align-items: center; max-width: 480px; }
+  .form > label { text-align: right; }
+  .legend { font-family: var(--font-bold); font-weight: 700; }
+  .help { font-size: 10px; color: var(--fg-muted); grid-column: 2; margin-top: -2px; }
+</style></head>
+<body>
+  <div class="sap-fieldset">
+    <span class="legend">Cards</span>
+    <div class="form">
+      <label>Payment</label>
+      <span class="sap-select"><input class="sap-input" value="Visa •••• 4242" style="width:200px"><span class="arrow">▼</span></span>
+      <label style="color:var(--status-error)">Error</label>
+      <input class="sap-input is-error" value="" style="width:200px">
+      <div class="help" style="color:var(--status-error)">Field is required.</div>
+      <label>Help text</label>
+      <input class="sap-input" value="" style="width:200px">
+      <div class="help">Enter the customer's tax ID (10 digits).</div>
+      <label>Component</label>
+      <span class="sap-select"><input class="sap-input" value="Tecibant" style="width:200px"><span class="arrow">▼</span></span>
+    </div>
+  </div>
+</body></html>

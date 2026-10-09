@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Breadcrumb & Pagination" subtitle="Crumbs + paginated control" viewport="700x110" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:14px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .row { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .lbl { font-size: 10px; color: var(--fg-muted); margin-top: 4px; text-align: center; }
+  .col { display:flex; flex-direction:column; align-items:center; gap:4px; }
+</style></head>
+<body>
+  <div class="row">
+    <div class="col">
+      <div class="sap-crumbs">
+        <a class="sap-link">Home</a><span class="sep">›</span>
+        <a class="sap-link">Shipment</a><span class="sep">›</span>
+        <span>Create</span>
+      </div>
+      <div class="lbl">Breadcrumb</div>
+    </div>
+    <div class="col">
+      <div class="sap-pagination">
+        <span class="pg">‹</span>
+        <span class="pg">1</span>
+        <span class="pg is-active">2</span>
+        <span class="pg">3</span>
+        <span class="pg">4</span>
+        <span class="pg">…</span>
+        <span class="pg">›</span>
+      </div>
+      <div class="lbl">Pagination</div>
+    </div>
+  </div>
+</body></html>

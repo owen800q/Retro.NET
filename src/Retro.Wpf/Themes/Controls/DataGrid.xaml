@@ -1,0 +1,245 @@
+<!-- DataGrid: white sunken table, beveled bold headers, mid-gray grid lines, amber row selection. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctl="clr-namespace:Retro.Wpf.Controls">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Shared.xaml"/>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Controls/Selection.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <Style x:Key="Retro.DataGridGripper" TargetType="Thumb">
+    <Setter Property="Width" Value="6"/>
+    <Setter Property="Cursor" Value="SizeWE"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Thumb">
+          <Border Background="Transparent"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="DataGridColumnHeader">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily.Bold}"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Gradient.Toolbar}"/>
+    <!-- CSS: padding 3px 6px inside a 1px raised bevel. -->
+    <Setter Property="Padding" Value="5,2"/>
+    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DataGridColumnHeader">
+          <Grid>
+            <ctl:Bevel x:Name="Bevel" Kind="Raised" Background="{TemplateBinding Background}"
+                       LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}">
+              <DockPanel Margin="{TemplateBinding Padding}">
+                <Path x:Name="SortArrow" DockPanel.Dock="Right" Margin="4,0,0,0" Stretch="None" Visibility="Collapsed"
+                      Fill="{DynamicResource Retro.Foreground}" VerticalAlignment="Center"/>
+                <ContentPresenter RecognizesAccessKey="True"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+              </DockPanel>
+            </ctl:Bevel>
+            <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Margin="-3,0,0,0" Style="{StaticResource Retro.DataGridGripper}"/>
+            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Margin="0,0,-3,0" Style="{StaticResource Retro.DataGridGripper}"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Bevel" Property="Background" Value="{DynamicResource Retro.Gradient.ButtonHover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="Bevel" Property="Kind" Value="Sunken"/>
+            </Trigger>
+            <Trigger Property="SortDirection" Value="Ascending">
+              <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
+              <Setter TargetName="SortArrow" Property="Data" Value="{StaticResource Retro.Glyph.ArrowUp}"/>
+            </Trigger>
+            <Trigger Property="SortDirection" Value="Descending">
+              <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
+              <Setter TargetName="SortArrow" Property="Data" Value="{StaticResource Retro.Glyph.ArrowDown}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="DataGridCell">
+    <Setter Property="Padding" Value="6,2"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DataGridCell">
+          <Border x:Name="Bd" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"
+                  BorderBrush="Transparent" BorderThickness="1" Margin="-1" SnapsToDevicePixels="True">
+            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="IsKeyboardFocusWithin" Value="True"/>
+                <Condition Property="IsEditing" Value="False"/>
+              </MultiTrigger.Conditions>
+              <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource Retro.BorderBlack}"/>
+            </MultiTrigger>
+            <Trigger Property="IsEditing" Value="True">
+              <Setter TargetName="Bd" Property="Background" Value="{DynamicResource Retro.InputFocusBackground}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsSelected" Value="True">
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundOnAccent}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="DataGridRow">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background" Value="{DynamicResource Retro.AccentPale}"/>
+      </Trigger>
+      <Trigger Property="IsSelected" Value="True">
+        <Setter Property="Background" Value="{DynamicResource Retro.Accent}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundOnAccent}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="DataGridRowHeader">
+    <Setter Property="Background" Value="{DynamicResource Retro.Gradient.Toolbar}"/>
+    <Setter Property="Width" Value="12"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DataGridRowHeader">
+          <ctl:Bevel Kind="Raised" Background="{TemplateBinding Background}"
+                     LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </ctl:Bevel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="Retro.DataGridSelectAllButton" TargetType="Button">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <ctl:Bevel Kind="Raised" Background="{DynamicResource Retro.Gradient.Toolbar}"
+                     LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Use as DataGridCheckBoxColumn.ElementStyle to get the Retro check box in read-only cells. -->
+  <Style x:Key="Retro.DataGridCheckBox" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+    <Setter Property="Focusable" Value="False"/>
+  </Style>
+  <Style x:Key="Retro.DataGridCheckBox.Editing" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+
+  <Style TargetType="DataGrid">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.SurfaceInset}"/>
+    <Setter Property="RowBackground" Value="Transparent"/>
+    <Setter Property="AlternatingRowBackground" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="GridLinesVisibility" Value="All"/>
+    <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Retro.BorderMid}"/>
+    <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource Retro.BorderMid}"/>
+    <Setter Property="HeadersVisibility" Value="Column"/>
+    <Setter Property="SelectionUnit" Value="FullRow"/>
+    <Setter Property="CanUserResizeRows" Value="False"/>
+    <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+    <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+    <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="UseLayoutRounding" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DataGrid">
+          <ctl:Bevel x:Name="Bevel" Kind="SunkenStrong" Background="{TemplateBinding Background}"
+                     LightBrush="{DynamicResource Retro.BorderLight}" DarkBrush="{DynamicResource Retro.BorderDark}"
+                     OutlineBrush="{DynamicResource Retro.BorderBlack}" Padding="{TemplateBinding Padding}">
+            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False">
+              <ScrollViewer.Template>
+                <ControlTemplate TargetType="ScrollViewer">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="*"/>
+                      <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Command="{x:Static DataGrid.SelectAllCommand}" Focusable="False"
+                            Style="{StaticResource Retro.DataGridSelectAllButton}"
+                            Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                    <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1"
+                            Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                    <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Grid.Row="1" Grid.ColumnSpan="2"
+                                            CanContentScroll="{TemplateBinding CanContentScroll}"/>
+                    <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Row="1" Grid.Column="2" Orientation="Vertical"
+                               Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}"
+                               Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                               Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                    <Grid Grid.Row="2" Grid.Column="1">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                        <ColumnDefinition Width="*"/>
+                      </Grid.ColumnDefinitions>
+                      <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1" Orientation="Horizontal"
+                                 Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}"
+                                 Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                 Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                    </Grid>
+                    <Rectangle Grid.Row="2" Grid.Column="2" Fill="{DynamicResource Retro.Surface}"/>
+                  </Grid>
+                </ControlTemplate>
+              </ScrollViewer.Template>
+              <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+            </ScrollViewer>
+          </ctl:Bevel>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Bevel" Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+              <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsGrouping" Value="True">
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+</ResourceDictionary>

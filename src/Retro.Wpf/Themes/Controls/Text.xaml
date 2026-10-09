@@ -1,0 +1,134 @@
+<!-- Typography styles, Hyperlink, Label, Window, and Bevel panel presets. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctl="clr-namespace:Retro.Wpf.Controls">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Retro.Wpf;component/Themes/Shared.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- ===== Type ramp (.sap-h1 … .sap-mono) ============================== -->
+  <Style x:Key="Retro.Text.H1" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily.Bold}"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.3XL}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.HeaderBlue1}"/>
+  </Style>
+  <Style x:Key="Retro.Text.H2" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily.Bold}"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.2XL}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.HeaderBlue1}"/>
+  </Style>
+  <Style x:Key="Retro.Text.H3" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily.Bold}"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.XL}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+  </Style>
+  <Style x:Key="Retro.Text.Body" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+  </Style>
+  <Style x:Key="Retro.Text.Bold" TargetType="TextBlock" BasedOn="{StaticResource Retro.Text.Body}">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily.Bold}"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+  </Style>
+  <Style x:Key="Retro.Text.Help" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.XS}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundMuted}"/>
+  </Style>
+  <Style x:Key="Retro.Text.Mono" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily.Mono}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+  </Style>
+
+  <!-- ===== Links: blue underline, red-orange on hover ================== -->
+  <Style TargetType="Hyperlink">
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Link}"/>
+    <Setter Property="TextDecorations" Value="Underline"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Foreground" Value="{DynamicResource Retro.LinkHover}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="Retro.Hyperlink.Visited" TargetType="Hyperlink" BasedOn="{StaticResource {x:Type Hyperlink}}">
+    <Setter Property="Foreground" Value="{DynamicResource Retro.LinkVisited}"/>
+  </Style>
+
+  <Style TargetType="Label">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="Padding" Value="0,3,0,0"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Label">
+          <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+            <ContentPresenter RecognizesAccessKey="True"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ===== Plain Window (apply with Style="{StaticResource Retro.Window}") === -->
+  <Style x:Key="Retro.Window" TargetType="Window">
+    <Setter Property="FontFamily" Value="{DynamicResource Retro.FontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource Retro.FontSize.SM}"/>
+    <Setter Property="Foreground" Value="{DynamicResource Retro.Foreground}"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Surface}"/>
+    <Setter Property="UseLayoutRounding" Value="True"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+    <Setter Property="TextOptions.TextRenderingMode" Value="Aliased"/>
+  </Style>
+
+  <!-- ===== Bevel presets ================================================ -->
+  <!-- Raised panel (surface-2, strong bevel), e.g. the tab page container. -->
+  <Style x:Key="Retro.Panel" TargetType="ctl:Bevel">
+    <Setter Property="Kind" Value="RaisedStrong"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Surface2}"/>
+    <Setter Property="Padding" Value="10,8"/>
+  </Style>
+  <!-- Sunken inset strip, e.g. the breadcrumb bar. -->
+  <Style x:Key="Retro.InsetPanel" TargetType="ctl:Bevel">
+    <Setter Property="Kind" Value="Sunken"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Surface3}"/>
+    <Setter Property="Padding" Value="7,3"/>
+  </Style>
+  <!-- Amber page banner ("You are viewing this document in Display mode"). -->
+  <Style x:Key="Retro.Banner" TargetType="ctl:Bevel">
+    <Setter Property="Kind" Value="Raised"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Gradient.Banner}"/>
+    <Setter Property="Padding" Value="7,3"/>
+  </Style>
+  <!-- Popover / popconfirm surface with the hard 2px drop shadow. -->
+  <Style x:Key="Retro.Popover" TargetType="ctl:Bevel">
+    <Setter Property="Kind" Value="RaisedStrong"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.Surface}"/>
+    <Setter Property="Padding" Value="6"/>
+    <Setter Property="DropShadow" Value="2"/>
+    <Setter Property="DropShadowBrush" Value="{DynamicResource Retro.DropShadow}"/>
+  </Style>
+  <!-- White sunken well (tables, empty states). -->
+  <Style x:Key="Retro.Well" TargetType="ctl:Bevel">
+    <Setter Property="Kind" Value="SunkenStrong"/>
+    <Setter Property="Background" Value="{DynamicResource Retro.SurfaceInset}"/>
+  </Style>
+
+</ResourceDictionary>

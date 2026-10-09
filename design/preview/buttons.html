@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Buttons" subtitle="States + icon + label combos" viewport="700x140" -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin:0; padding:16px; background: var(--surface); font-family: var(--font-system); font-size: 11px; }
+  .grid { display: grid; grid-template-columns: repeat(5, auto); gap: 12px; align-items: center; justify-content: start; }
+  .lbl { font-size: 10px; color: var(--fg-muted); margin-top: 4px; text-align: center; }
+  .col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+</style></head>
+<body>
+  <div class="grid">
+    <div class="col"><button class="sap-btn">Execute</button><div class="lbl">default</div></div>
+    <div class="col"><button class="sap-btn" style="background:var(--gradient-button-hover)">Hover</button><div class="lbl">hover</div></div>
+    <div class="col"><button class="sap-btn is-pressed">Active</button><div class="lbl">pressed</div></div>
+    <div class="col"><button class="sap-btn is-disabled">Disabled</button><div class="lbl">disabled</div></div>
+    <div class="col"><button class="sap-btn icon-only" aria-label="print"><svg width="16" height="16"><use href="../assets/icons.svg#print"/></svg></button><div class="lbl">icon-only</div></div>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 6px; align-items: center">
+    <button class="sap-btn"><svg width="16" height="16"><use href="../assets/icons.svg#document"/></svg>Shipment</button>
+    <button class="sap-btn"><svg width="16" height="16"><use href="../assets/icons.svg#export"/></svg>Track Shipment</button>
+    <button class="sap-btn"><svg width="16" height="16"><use href="../assets/icons.svg#table"/></svg>Table Settings</button>
+  </div>
+</body></html>

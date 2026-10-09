@@ -1,0 +1,9 @@
+<retro:RetroWindow x:Class="Retro.Wpf.Demo.MainWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:retro="https://github.com/owen800q/Retro.NET"
+                   xmlns:local="clr-namespace:Retro.Wpf.Demo"
+                   Title="Shipment: Display 0000080014"
+                   Width="1100" Height="720" WindowStartupLocation="CenterScreen">
+  <local:ShipmentView/>
+</retro:RetroWindow>
