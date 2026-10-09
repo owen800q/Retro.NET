@@ -55,14 +55,18 @@ namespace Retro.Wpf.Tests
             Dispatcher = dispatcher!;
         }
 
-        public static void Run(Action action)
+        private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(60);
+
+        public static void Run(Action action, [System.Runtime.CompilerServices.CallerMemberName] string? caller = null)
         {
             Exception? error = null;
-            Dispatcher.Invoke(() =>
+            DispatcherOperation op = Dispatcher.BeginInvoke(new Action(() =>
             {
                 try { action(); }
                 catch (Exception ex) { error = ex; }
-            });
+            }));
+            if (op.Wait(Timeout) != DispatcherOperationStatus.Completed)
+                throw new TimeoutException("UI work in " + caller + " did not finish within " + Timeout.TotalSeconds + "s (status " + op.Status + ")");
             if (error != null)
                 ExceptionDispatchInfo.Capture(error).Throw();
         }
@@ -71,7 +75,7 @@ namespace Retro.Wpf.Tests
         public static void DoEvents()
         {
             var frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => frame.Continue = false));
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => frame.Continue = false));
             Dispatcher.PushFrame(frame);
         }
 
