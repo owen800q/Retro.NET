@@ -19,7 +19,9 @@ namespace Retro.Wpf.Tests
     internal static class Ui
     {
         private static readonly Dispatcher Dispatcher;
-        public static readonly BindingErrorListener BindingErrors = new BindingErrorListener();
+
+        /// <summary>Binding errors seen so far (lives in its own class: the UI thread must not touch Ui statics while Ui is initializing).</summary>
+        public static BindingErrorListener BindingErrors => Diagnostics.BindingErrors;
 
         static Ui()
         {
@@ -31,7 +33,7 @@ namespace Retro.Wpf.Tests
                 try
                 {
                     PresentationTraceSources.Refresh();
-                    PresentationTraceSources.DataBindingSource.Listeners.Add(BindingErrors);
+                    PresentationTraceSources.DataBindingSource.Listeners.Add(Diagnostics.BindingErrors);
                     PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Error;
 
                     var app = new Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
@@ -180,6 +182,11 @@ namespace Retro.Wpf.Tests
 
         public static Point Origin(Visual element, Visual ancestor) =>
             element.TransformToAncestor(ancestor).Transform(new Point(0, 0));
+    }
+
+    internal static class Diagnostics
+    {
+        public static readonly BindingErrorListener BindingErrors = new BindingErrorListener();
     }
 
     internal static class TextOptionsHelper

@@ -76,7 +76,7 @@ jobs:
           $dir = Join-Path $env:RUNNER_TEMP 'snapshots-branch'
           git init -q $dir
           Copy-Item artifacts/snapshots/* $dir
-          Copy-Item artifacts/test-results -Recurse (Join-Path $dir 'test-results') -ErrorAction SilentlyContinue
+          Get-ChildItem artifacts/test-results -Recurse -Include *.trx,*.log -ErrorAction SilentlyContinue | Copy-Item -Destination $dir
           Set-Location $dir
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
