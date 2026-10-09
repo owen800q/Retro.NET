@@ -5,7 +5,7 @@
 [![build](https://github.com/owen800q/Retro.NET/actions/workflows/build.yml/badge.svg)](https://github.com/owen800q/Retro.NET/actions/workflows/build.yml)
 [![NuGet](https://img.shields.io/nuget/v/Retro.NET.svg)](https://www.nuget.org/packages/Retro.NET)
 
-![Shipment Maintenance demo](https://raw.githubusercontent.com/owen800q/Retro.NET/main/docs/screenshots/shipment-items.png)
+![Shipment Maintenance demo](https://raw.githubusercontent.com/owen800q/Retro.NET/main/docs/screenshots/main-window.png)
 
 - **One line to restyle an app.** Every standard WPF control gets the Retro look: Button, TextBox, PasswordBox, ComboBox, CheckBox, RadioButton, TabControl, GroupBox, Expander, ListBox, ListView, TreeView, DataGrid, ProgressBar, Slider, ScrollBar, Menu, ContextMenu, ToolBar, StatusBar, ToolTip, Calendar, DatePicker, Hyperlink and Label.
 - **Extra controls from the design system.** `RetroWindow`, `Bevel`, `ToggleSwitch`, `Tag`, `MessageStrip`, `Badge`, `Avatar`, `Breadcrumb`, `Pagination`, `FormField`, `Timeline`, `EmptyState`, `RetroIcon` and `RetroMessageBox`.
@@ -143,6 +143,10 @@ The same colors are available in code as `Retro.Wpf.RetroColors`.
 ```
 dotnet run --project samples/Retro.Wpf.Demo
 ```
+
+![Items tab](https://raw.githubusercontent.com/owen800q/Retro.NET/main/docs/screenshots/shipment-items.png)
+
+![RetroMessageBox](https://raw.githubusercontent.com/owen800q/Retro.NET/main/docs/screenshots/dialog.png)
 
 ![Component gallery](https://raw.githubusercontent.com/owen800q/Retro.NET/main/docs/screenshots/gallery.png)
 
