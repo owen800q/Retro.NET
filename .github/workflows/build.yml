@@ -52,6 +52,11 @@ jobs:
         if: always()
         shell: pwsh
         run: |
+          if (Test-Path artifacts/test-results/console.log) {
+            $tail = (Get-Content artifacts/test-results/console.log -Tail 80) -join "`n"
+            $tail = $tail.Replace('%', '%25').Replace("`r", '').Replace("`n", '%0A')
+            Write-Output "::notice title=dotnet test output (tail)::$tail"
+          }
           $trx = Get-ChildItem artifacts/test-results -Recurse -Filter *.trx -ErrorAction SilentlyContinue | Select-Object -First 1
           if (-not $trx) { Write-Output "::error title=Tests::No test results were produced"; exit 0 }
           [xml]$x = Get-Content $trx.FullName
@@ -77,8 +82,10 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git checkout -q -b ci-snapshots
           git add -A
-          git commit -q -m "UI snapshots for ${{ github.sha }} (run ${{ github.run_number }})"
-          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci-snapshots
+          $out = (git commit -q --allow-empty -m "UI snapshots for ${{ github.sha }} (run ${{ github.run_number }})" 2>&1) -join ' '
+          if ($LASTEXITCODE -ne 0) { Write-Output "::error title=Snapshot commit::$out"; exit 1 }
+          $out = (git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci-snapshots 2>&1) -join ' '
+          if ($LASTEXITCODE -ne 0) { Write-Output "::error title=Snapshot push::$out"; exit 1 }
 
       - name: Upload test results & UI snapshots
         if: always()
