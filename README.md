@@ -2,7 +2,7 @@
 
 **A pixel-faithful retro enterprise theme for WPF**: the beveled, 3D, MS Sans Serif look of classic SAP GUI / Windows 9x workstations, built as a real WPF control library.
 
-[![build](https://github.com/owen800q/Retro.NET/actions/workflows/build.yml/badge.svg)](https://github.com/owen800q/Retro.NET/actions/workflows/build.yml)
+[![build](https://img.shields.io/github/actions/workflow/status/owen800q/Retro.NET/build.yml?branch=main)](https://github.com/owen800q/Retro.NET/actions/workflows/build.yml)
 [![NuGet](https://img.shields.io/nuget/v/Retro.NET.svg)](https://www.nuget.org/packages/Retro.NET)
 
 ![Shipment Maintenance demo](https://raw.githubusercontent.com/owen800q/Retro.NET/main/docs/screenshots/main-window.png)
