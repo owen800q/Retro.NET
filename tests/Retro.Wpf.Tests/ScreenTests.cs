@@ -37,8 +37,16 @@ namespace Retro.Wpf.Tests
             Ui.Run(() =>
             {
                 Ui.BindingErrors.Clear();
-                var view = new GalleryView();
-                var bmp = Ui.Render(view, 1160, double.NaN, "screen-gallery");
+                // Hosted in a real (off-screen) window so Loaded fires and the DataGrid sizes its columns.
+                var window = new Window
+                {
+                    Content = new GalleryView(),
+                    Width = 1160,
+                    SizeToContent = SizeToContent.Height,
+                    WindowStyle = WindowStyle.None,
+                    ResizeMode = ResizeMode.NoResize,
+                };
+                var bmp = Ui.RenderWindow(window, "screen-gallery");
                 Assert.True(bmp.PixelHeight > 1200);
                 ControlRenderTests.AssertNoBindingErrors();
             });

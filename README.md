@@ -146,6 +146,16 @@ dotnet run --project samples/Retro.Wpf.Demo
 
 ![Component gallery](https://raw.githubusercontent.com/owen800q/Retro.NET/main/docs/screenshots/gallery.png)
 
+## Showcase
+
+### [RetroCap](https://github.com/owen800q/RetroCap)
+
+A QQ-style screenshot and annotation tool for Windows 10 and 11. Press **Ctrl+Alt+A** anywhere, pick a region, then mark it up with rectangles, arrows, text, a highlighter or mosaic, and copy it, save it or pin it to the screen. Its UI follows the same Retro SAP GUI design system.
+
+![RetroCap annotating a capture](https://raw.githubusercontent.com/owen800q/RetroCap/master/docs/screenshot-annotate.png)
+
+*Built something with Retro.NET? Open a pull request to add it here.*
+
 ## Building
 
 ```
