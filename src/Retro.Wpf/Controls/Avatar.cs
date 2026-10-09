@@ -17,7 +17,28 @@ namespace Retro.Wpf.Controls
             nameof(Initials), typeof(string), typeof(Avatar), new FrameworkPropertyMetadata(null));
 
         public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register(
-            nameof(ImageSource), typeof(ImageSource), typeof(Avatar), new FrameworkPropertyMetadata(null));
+            nameof(ImageSource), typeof(ImageSource), typeof(Avatar), new FrameworkPropertyMetadata(null, OnImageSourceChanged));
+
+        private static readonly DependencyPropertyKey PhotoBrushPropertyKey = DependencyProperty.RegisterReadOnly(
+            nameof(PhotoBrush), typeof(Brush), typeof(Avatar), new FrameworkPropertyMetadata(null));
+
+        public static readonly DependencyProperty PhotoBrushProperty = PhotoBrushPropertyKey.DependencyProperty;
+
+        /// <summary>Fill for the photo circle, derived from <see cref="ImageSource"/>.</summary>
+        public Brush? PhotoBrush => (Brush?)GetValue(PhotoBrushProperty);
+
+        private static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Brush? brush = null;
+            if (e.NewValue is ImageSource source)
+            {
+                var b = new ImageBrush(source) { Stretch = Stretch.UniformToFill };
+                if (b.CanFreeze)
+                    b.Freeze();
+                brush = b;
+            }
+            d.SetValue(PhotoBrushPropertyKey, brush);
+        }
 
         public static readonly DependencyProperty SizeProperty = DependencyProperty.Register(
             nameof(Size), typeof(double), typeof(Avatar), new FrameworkPropertyMetadata(32.0));

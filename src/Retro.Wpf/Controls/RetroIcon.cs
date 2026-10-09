@@ -20,7 +20,21 @@ namespace Retro.Wpf.Controls
             nameof(Size), typeof(double), typeof(RetroIcon),
             new FrameworkPropertyMetadata(16.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            nameof(Icon), typeof(IconKind?), typeof(RetroIcon),
+            new FrameworkPropertyMetadata(null, (d, e) =>
+            {
+                if (e.NewValue is IconKind kind)
+                    d.SetCurrentValue(KindProperty, kind);
+            }));
+
         public IconKind Kind { get => (IconKind)GetValue(KindProperty); set => SetValue(KindProperty, value); }
+
+        /// <summary>
+        /// Nullable alias of <see cref="Kind"/> for templates: <c>Icon="{TemplateBinding retro:Assist.Icon}"</c>.
+        /// A null value leaves <see cref="Kind"/> unchanged (templates collapse the icon instead).
+        /// </summary>
+        public IconKind? Icon { get => (IconKind?)GetValue(IconProperty); set => SetValue(IconProperty, value); }
 
         /// <summary>Edge length in DIPs (16 by default; 32 for dialogs, 14 for menus and title bars).</summary>
         public double Size { get => (double)GetValue(SizeProperty); set => SetValue(SizeProperty, value); }

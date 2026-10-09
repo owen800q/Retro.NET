@@ -17,7 +17,7 @@
                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
         <ctl:RetroIcon x:Name="Icon" Margin="0,0,4,0" VerticalAlignment="Center"
-                       Kind="{Binding (retro:Assist.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Retro.NullSkip}}"/>
+                       Icon="{TemplateBinding retro:Assist.Icon}"/>
         <ContentPresenter x:Name="Content" RecognizesAccessKey="True" VerticalAlignment="Center"
                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
       </StackPanel>
@@ -99,7 +99,7 @@
                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
         <ctl:RetroIcon x:Name="Icon" Margin="0,0,4,0" VerticalAlignment="Center"
-                       Kind="{Binding (retro:Assist.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Retro.NullSkip}}"/>
+                       Icon="{TemplateBinding retro:Assist.Icon}"/>
         <ContentPresenter x:Name="Content" RecognizesAccessKey="True" VerticalAlignment="Center"/>
       </StackPanel>
     </ctl:Bevel>

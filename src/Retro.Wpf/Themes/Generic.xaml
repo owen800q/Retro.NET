@@ -330,11 +330,7 @@
               <Ellipse Fill="{DynamicResource Retro.BorderLight}"/>
               <Ellipse Margin="2" Fill="{TemplateBinding Background}"/>
               <TextBlock Text="{TemplateBinding Initials}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-              <Ellipse x:Name="Photo" Margin="2">
-                <Ellipse.Fill>
-                  <ImageBrush ImageSource="{Binding ImageSource, RelativeSource={RelativeSource TemplatedParent}}" Stretch="UniformToFill"/>
-                </Ellipse.Fill>
-              </Ellipse>
+              <Ellipse x:Name="Photo" Margin="2" Fill="{TemplateBinding PhotoBrush}"/>
             </Grid>
           </Grid>
           <ControlTemplate.Triggers>

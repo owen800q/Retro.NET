@@ -115,7 +115,7 @@
         </Grid.ColumnDefinitions>
         <ContentPresenter x:Name="IconSite" ContentSource="Icon" Width="14" Height="14" Margin="4,0" VerticalAlignment="Center"/>
         <ctl:RetroIcon x:Name="AssistIcon" Size="14" Margin="4,0" VerticalAlignment="Center" Visibility="Collapsed"
-                       Kind="{Binding (retro:Assist.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Retro.NullSkip}}"/>
+                       Icon="{TemplateBinding retro:Assist.Icon}"/>
         <Path x:Name="CheckMark" Data="{StaticResource Retro.Glyph.Check}" Fill="{TemplateBinding Foreground}"
               Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
         <ContentPresenter Grid.Column="1" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
