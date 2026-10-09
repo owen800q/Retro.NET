@@ -7,6 +7,24 @@ using Retro.Wpf.Controls;
 
 namespace Retro.Wpf.Demo
 {
+    public sealed class SampleRow
+    {
+        public SampleRow(string doc, string carrier, string status, TagTone tone, string amount)
+        {
+            Doc = doc;
+            Carrier = carrier;
+            Status = status;
+            Tone = tone;
+            Amount = amount;
+        }
+
+        public string Doc { get; }
+        public string Carrier { get; }
+        public string Status { get; }
+        public TagTone Tone { get; }
+        public string Amount { get; }
+    }
+
     public partial class GalleryView : UserControl
     {
         private static readonly string[] SwatchKeys =
@@ -22,11 +40,11 @@ namespace Retro.Wpf.Demo
 
             SampleGrid.ItemsSource = new[]
             {
-                new { Doc = "6000068250", Carrier = "DHL Freight", Status = "Open", Tone = TagTone.Info, Amount = "14,553.21" },
-                new { Doc = "6000068251", Carrier = "UPS Ground", Status = "Hold", Tone = TagTone.Warning, Amount = "2,841.00" },
-                new { Doc = "6000068252", Carrier = "FedEx Express", Status = "Error", Tone = TagTone.Error, Amount = "9,120.45" },
-                new { Doc = "6000068253", Carrier = "Schenker", Status = "Open", Tone = TagTone.Info, Amount = "655.10" },
-                new { Doc = "6000068254", Carrier = "Kuehne+Nagel", Status = "Open", Tone = TagTone.Info, Amount = "23,990.00" },
+                new SampleRow("6000068250", "DHL Freight", "Open", TagTone.Info, "14,553.21"),
+                new SampleRow("6000068251", "UPS Ground", "Hold", TagTone.Warning, "2,841.00"),
+                new SampleRow("6000068252", "FedEx Express", "Error", TagTone.Error, "9,120.45"),
+                new SampleRow("6000068253", "Schenker", "Open", TagTone.Info, "655.10"),
+                new SampleRow("6000068254", "Kuehne+Nagel", "Open", TagTone.Info, "23,990.00"),
             };
             SampleGrid.SelectedIndex = 2;
 

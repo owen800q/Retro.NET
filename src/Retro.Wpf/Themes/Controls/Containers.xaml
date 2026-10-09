@@ -36,12 +36,13 @@
               <Setter TargetName="Shape" Property="Background" Value="{DynamicResource Retro.HeaderBlue2}"/>
               <Setter TargetName="Shape" Property="LightBrush" Value="{DynamicResource Retro.HeaderGloss}"/>
               <Setter TargetName="Shape" Property="DarkBrush" Value="{x:Null}"/>
-              <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundOnHeader}"/>
-              <Setter Property="FontWeight" Value="Bold"/>
+              <!-- Set on the header only: the page content inherits from the TabItem. -->
+              <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource Retro.ForegroundOnHeader}"/>
+              <Setter TargetName="Header" Property="TextElement.FontWeight" Value="Bold"/>
               <Setter TargetName="Header" Property="Margin" Value="14,4,14,6"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-              <Setter Property="Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
+              <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource Retro.ForegroundDisabled}"/>
               <Setter TargetName="Shape" Property="Background" Value="{DynamicResource Retro.Surface2}"/>
             </Trigger>
           </ControlTemplate.Triggers>

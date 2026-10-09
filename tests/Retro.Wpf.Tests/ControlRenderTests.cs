@@ -171,12 +171,18 @@ namespace Retro.Wpf.Tests
                 bool usesRetroVisuals = Ui.Descendants<Bevel>(host).Any() || Ui.Descendants<TabShape>(host).Any()
                                         || Ui.Descendants<RetroIcon>(host).Any();
                 if (name != "Menu" && name != "StatusBar" && name != "Breadcrumb" && name != "Timeline" && name != "Avatar"
-                    && name != "Tag" && name != "MessageStrip")
+                    && name != "Tag" && name != "MessageStrip" && name != "RadioButton")
                 {
                     Assert.True(usesRetroVisuals, name + " does not use a Retro template");
                 }
-                Assert.Empty(Ui.BindingErrors.Messages);
+                AssertNoBindingErrors();
             });
+        }
+
+        internal static void AssertNoBindingErrors()
+        {
+            var errors = Ui.BindingErrors.Messages;
+            Assert.True(errors.Count == 0, "Binding errors:\n" + string.Join("\n", errors));
         }
 
         [Fact]

@@ -27,7 +27,7 @@ namespace Retro.Wpf.Tests
                         tabs.SelectedIndex = i + 1;
                 }
                 Assert.Equal("Items (6)", view.ViewModel.ItemsHeader);
-                Assert.Empty(Ui.BindingErrors.Messages);
+                ControlRenderTests.AssertNoBindingErrors();
             });
         }
 
@@ -40,7 +40,7 @@ namespace Retro.Wpf.Tests
                 var view = new GalleryView();
                 var bmp = Ui.Render(view, 1160, double.NaN, "screen-gallery");
                 Assert.True(bmp.PixelHeight > 1200);
-                Assert.Empty(Ui.BindingErrors.Messages);
+                ControlRenderTests.AssertNoBindingErrors();
             });
         }
 
